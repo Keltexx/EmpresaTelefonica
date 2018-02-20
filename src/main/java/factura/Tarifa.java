@@ -1,6 +1,6 @@
 package factura;
 
-public class Tarifa {
+public class Tarifa{
 	private double importe;
 	
 	public Tarifa(double importe){

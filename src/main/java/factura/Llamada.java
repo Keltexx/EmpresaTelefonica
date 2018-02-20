@@ -2,7 +2,9 @@ package factura;
 
 import java.sql.Date;
 
-public class Llamada {
+import interfaces.Fecha;
+
+public class Llamada implements Fecha{
 	private int numero;
 	private Date fecha;
 	private Date hora;

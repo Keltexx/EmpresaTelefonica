@@ -3,7 +3,9 @@ package factura;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Factura {
+import interfaces.Fecha;
+
+public class Factura implements Fecha{
 	private Tarifa tarifa;
 	private int codigo;
 	private Date fechaEmision;
