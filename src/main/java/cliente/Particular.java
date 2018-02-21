@@ -1,6 +1,6 @@
 package cliente;
 
-import java.sql.Date;
+import java.util.Date;
 
 import direccion.Direccion;
 import factura.Tarifa;

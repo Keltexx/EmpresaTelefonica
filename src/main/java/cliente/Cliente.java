@@ -1,6 +1,6 @@
 package cliente;
 
-import java.sql.Date;
+import java.util.Date;
 
 import direccion.Direccion;
 import factura.Tarifa;
@@ -20,6 +20,10 @@ public class Cliente {
 		this.tarifa=tarifa;
 	}
 	
+
+	public String getFecha() {
+		return fechaDeAlta.toString();
+	}
 	
 	
 	
