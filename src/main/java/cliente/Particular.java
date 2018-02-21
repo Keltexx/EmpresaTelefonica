@@ -3,7 +3,7 @@ package cliente;
 import java.sql.Date;
 
 import direccion.Direccion;
-import tarifa.Tarifa;
+import factura.Tarifa;
 
 public class Particular extends Cliente{
 	private String apellidos;
