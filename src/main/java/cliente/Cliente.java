@@ -24,6 +24,10 @@ public class Cliente {
 		return fechaDeAlta.toString();
 	}
 	
+	public String getNIF() {
+		return this.NIF;
+	}
+	
 	
 	
 	
