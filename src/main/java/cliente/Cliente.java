@@ -2,7 +2,6 @@ package cliente;
 
 import java.util.Date;
 
-import direccion.Direccion;
 import factura.Tarifa;
 
 public class Cliente {

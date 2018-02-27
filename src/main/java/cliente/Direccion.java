@@ -1,4 +1,4 @@
-package direccion;
+package cliente;
 
 public class Direccion {
 	private int codPostal;
