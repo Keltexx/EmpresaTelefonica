@@ -1,6 +1,7 @@
 package cliente;
 
 import java.util.Date;
+import java.util.Scanner;
 
 import factura.Tarifa;
 import interfaces.Fecha;
@@ -24,6 +25,13 @@ public class Cliente implements Fecha {
 		this.tarifa=tarifa;
 	}
 	
+	public Cliente(Cliente otro) {
+		this.NIF=otro.NIF;
+		this.direccion= otro.direccion;
+		this.correo=otro.correo;
+		this.fechaDeAlta=otro.fechaDeAlta;
+		this.tarifa=otro.tarifa;
+	}
 
 	public String getFecha() {
 		return fechaDeAlta.toString();
@@ -41,6 +49,35 @@ public class Cliente implements Fecha {
 		this.tarifa = tarifa;
 	}
 	
+	public Cliente pedirDatosCliente() {
+		System.out.println("Introducir datos cliente: ");
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Introduce NIF: ");
+		String nif = scan.next();
+		System.out.println("Introduce dirección: ");
+		System.out.println("	-Código Postal: ");
+		int codP = scan.nextInt();
+		System.out.println("	-Provincia: ");
+		String prov = scan.next();
+		System.out.println("	-Población: ");
+		String pob = scan.next();
+		Direccion dir = new Direccion(codP,prov,pob);
+		System.out.println("Introduce correo: ");
+		String correo = scan.next();
+		System.out.println("Introduce fecha de alta: ");
+		System.out.println("	-Año: ");
+		int año = scan.nextInt();
+		System.out.println("	-Mes: ");
+		int mes = scan.nextInt();
+		System.out.println("	-Día: ");
+		int dia = scan.nextInt();
+		Date fecha = new Date(año,mes,dia);
+		System.out.println("Introduce tarifa: ");
+		double importe = scan.nextDouble();
+		Tarifa tarifa = new Tarifa(importe);
+		Cliente cliente = new Cliente(nif,dir,correo,fecha,tarifa);
+		return cliente;
+	}
 	
 	
 }

@@ -1,10 +1,15 @@
 package main;
 
 import java.util.Scanner;
+import cliente.Cliente;
+import gestion.Gestion;
 
 public class Main {
 
 	public static void main(String[] args) {
+		Gestion gestion = new Gestion();
+		Cliente cliente=new Cliente(); 
+		cliente=cliente.pedirDatosCliente();
 		System.out.println(Menu.getMenu());
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Elige una opción:");
@@ -12,38 +17,38 @@ public class Main {
 		Menu opcionMenu = Menu.getOpcion(opcion);
 		switch (opcionMenu) {
 			case ALTA_CLIENTE:
-				darDeAltaCliente(cliente);
+				gestion.darDeAltaCliente(cliente);
 				break;
 			case BORRAR_CLIENTE:
-				borrarCliente(cliente);
+				gestion.borrarCliente(cliente);
 				break;
 			case CAMBIAR_TARIFA:
-				cambiarTarifa(cliente.getNIF(), cliente.getTarifa());
+				gestion.cambiarTarifa(cliente.getNIF(), cliente.getTarifa());
 				break;
 			case RECUPERAR_CLIENTE_NIF:
-				recuperarDatosNIF(cliente.getNIF());
+				gestion.recuperarDatosNIF(cliente.getNIF());
 				break;
 			case RECUPERAR_TODOS:
-				recuperarListadoClientes();
+				gestion.recuperarListadoClientes();
 				break;
 			case DAR_ALTA_LLAMADA:
-				darDeAltaLlamada(cliente.getNIF(),llamada);
+				//gestion.darDeAltaLlamada(cliente.getNIF(),llamada);
 				break;
 			case LISTAR_LLAMADAS:
-				listarLlamadasCliente(cliente.getNIF());
+				gestion.listarLlamadasCliente(cliente.getNIF());
 				break;
 			case EMITIR_FACTURA:
-				 emitirFactura(nif);
+				 gestion.emitirFactura(cliente.getNIF());
 				 break;
 			case RECUPERAR_DATOS_FACTURA:
-				recuperarDatosFacturaCodigo(codigo);
+				//gestion.recuperarDatosFacturaCodigo(codigo);
 				break;
 			case RECUPERAR_FACTURAS:
-				recuperarFacturas(cliente.getNIF());
+				gestion.recuperarFacturas(cliente.getNIF());
 				break;
 
 		}
-
+		scanner.close();
 	}
 
 }
