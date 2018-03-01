@@ -24,7 +24,7 @@ public class Main {
 				recuperarDatosNIF(cliente.getNIF());
 				break;
 			case RECUPERAR_TODOS:
-				devolverClientes();
+				recuperarListadoClientes();
 				break;
 			case DAR_ALTA_LLAMADA:
 				darDeAltaLlamada(cliente.getNIF(),llamada);
