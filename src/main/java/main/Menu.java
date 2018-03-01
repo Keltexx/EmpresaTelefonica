@@ -7,7 +7,12 @@ public enum Menu {
 	BORRAR_CLIENTE("Borrar un cliente"),
 	CAMBIAR_TARIFA("Cambiar la tarifa de un cliente"),
 	RECUPERAR_CLIENTE_NIF("Recuperar los datos de un cliente a partir de su NIF"),
-	RECUPERAR_TODOS("Recuperar el listado de todos los clientes");
+	RECUPERAR_TODOS("Recuperar el listado de todos los clientes"),
+	DAR_ALTA_LLAMADA("Dar de alta una llamada"),
+	LISTAR_LLAMADAS("Listar todas las llamadas de un cliente"),
+	EMITIR_FACTURA("Calcular factura"),
+	RECUPERAR_DATOS_FACTURA("Recuperar los datos de una factura"),
+	RECUPERAR_FACTURAS("Recuperar todas las facturas");
 	
 	private String descripcion;
 	
@@ -36,16 +41,7 @@ public enum Menu {
 	    return sb.toString();
 	}
 
-	System.out.println(Menu.getMenu());
-	Scanner scanner = new Scanner(System.in);
-	System.out.print("Elige una opción:");
-	byte opcion = scanner.nextByte();
-	Menu opcionMenu = Menu.getOpcion(opcion);
-	switch(opcionMenu) {
-		case ALTA_CLIENTE:
-		darDeAltaCliente()
 	
-	}
+}
 
 
-}}

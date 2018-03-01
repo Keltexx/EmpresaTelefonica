@@ -28,6 +28,10 @@ public class Cliente {
 		return this.NIF;
 	}
 	
+	public Tarifa getTarifa() {
+		return this.tarifa;
+	}
+	
 	
 	
 	
