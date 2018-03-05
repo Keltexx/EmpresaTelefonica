@@ -1,6 +1,6 @@
 package cliente;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Scanner;
 
 import factura.Tarifa;
@@ -10,14 +10,14 @@ public class Cliente implements Fecha {
 	private String NIF;
 	private Direccion direccion;
 	private String correo;
-	private Date fechaDeAlta;
+	private Calendar fechaDeAlta;
 	private Tarifa tarifa;
 	
 	public Cliente() {
 		super();
 	}
 	
-	public Cliente(String nif,Direccion dir, String correo, Date fecha, Tarifa tarifa) {
+	public Cliente(String nif,Direccion dir, String correo, Calendar fecha, Tarifa tarifa) {
 		this.NIF=nif;
 		this.direccion=dir;
 		this.correo=correo;
@@ -33,8 +33,8 @@ public class Cliente implements Fecha {
 		this.tarifa=otro.tarifa;
 	}
 
-	public String getFecha() {
-		return fechaDeAlta.toString();
+	public Calendar getFecha() {
+		return fechaDeAlta;
 	}
 	
 	public String getNIF() {
@@ -71,11 +71,13 @@ public class Cliente implements Fecha {
 		int mes = scan.nextInt();
 		System.out.println("	-Día: ");
 		int dia = scan.nextInt();
-		Date fecha = new Date(año,mes,dia);
+		Calendar fecha = null;
+		fecha.set(año, mes, dia);
 		System.out.println("Introduce tarifa: ");
 		double importe = scan.nextDouble();
 		Tarifa tarifa = new Tarifa(importe);
 		Cliente cliente = new Cliente(nif,dir,correo,fecha,tarifa);
+		scan.close();
 		return cliente;
 	}
 	

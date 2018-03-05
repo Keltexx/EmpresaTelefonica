@@ -10,4 +10,8 @@ public class Tarifa{
 	public Tarifa(Tarifa tarifa){
 		this.importe = tarifa.importe;
 	}
+	
+	public double getImporte() {
+		return this.importe;
+	}
 }

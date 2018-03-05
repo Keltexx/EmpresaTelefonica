@@ -1,6 +1,7 @@
 package gestion;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -83,7 +84,29 @@ public class Gestion {
 	
 	//OPERACIONES DE LAS FACTURAS
 	
-	public Factura emitirFactura(String nif){
+	public Factura emitirFactura(String nif, Calendar fechaFacturacion){
+		int codigo = this.facturasCodigo.size();
+		Tarifa tarifa = this.clientes.get(nif).getTarifa();
+		Calendar fechaEmision = Calendar.getInstance();
+		ArrayList<Calendar> periodoFacturacion = new ArrayList<Calendar>();
+		periodoFacturacion.add(fechaFacturacion);
+		periodoFacturacion.add(fechaEmision);
+		
+		int duracionLlamadas = 0;
+		List<Llamada> listaLlamadas = this.llamadas.get(nif);
+		for(Llamada llamada : listaLlamadas) {
+			if(llamada.getFecha().after(fechaFacturacion) && llamada.getFecha().before(fechaEmision))
+				duracionLlamadas += llamada.getDuracion();
+		}
+		
+		double importe = (duracionLlamadas / 60) * tarifa.getImporte();		
+		
+		Factura factura = new Factura(codigo, tarifa, fechaEmision, periodoFacturacion, importe);
+		
+		this.facturas.get(nif).add(factura);
+		this.facturasCodigo.put(nif, factura);
+		
+		return factura;
 		
 	}
 	
