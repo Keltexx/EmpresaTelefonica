@@ -7,6 +7,7 @@ import factura.Tarifa;
 import interfaces.Fecha;
 
 public class Cliente implements Fecha {
+	private String nombre;
 	private String NIF;
 	private Direccion direccion;
 	private String correo;
@@ -17,7 +18,8 @@ public class Cliente implements Fecha {
 		super();
 	}
 	
-	public Cliente(String nif,Direccion dir, String correo, Calendar fecha, Tarifa tarifa) {
+	public Cliente(String nombre,String nif,Direccion dir, String correo, Calendar fecha, Tarifa tarifa) {
+		this.nombre=nombre;
 		this.NIF=nif;
 		this.direccion=dir;
 		this.correo=correo;
@@ -26,6 +28,7 @@ public class Cliente implements Fecha {
 	}
 	
 	public Cliente(Cliente otro) {
+		this.nombre=otro.nombre;
 		this.NIF=otro.NIF;
 		this.direccion= otro.direccion;
 		this.correo=otro.correo;
@@ -52,6 +55,8 @@ public class Cliente implements Fecha {
 	public Cliente pedirDatosCliente() {
 		System.out.println("Introducir datos cliente: ");
 		Scanner scan = new Scanner(System.in);
+		System.out.println("Introduce nombre: ");
+		String nombre = scan.next();
 		System.out.println("Introduce NIF: ");
 		String nif = scan.next();
 		System.out.println("Introduce dirección: ");
@@ -76,7 +81,7 @@ public class Cliente implements Fecha {
 		System.out.println("Introduce tarifa: ");
 		double importe = scan.nextDouble();
 		Tarifa tarifa = new Tarifa(importe);
-		Cliente cliente = new Cliente(nif,dir,correo,fecha,tarifa);
+		Cliente cliente = new Cliente(nombre,nif,dir,correo,fecha,tarifa);
 		scan.close();
 		return cliente;
 	}
