@@ -18,7 +18,7 @@ import cliente.Cliente;
 import cliente.Direccion;
 import cliente.Empresa;
 
-public class LlamadaTest {
+public class FacturaTest {
 	private Gestion gestion;
 	private GeneradorDatosINE generador;
 	private Cliente cliente;
@@ -47,23 +47,6 @@ public class LlamadaTest {
 		llamada1=null;
 		llamada2=null;
 		llamada3=null;
-	}
-	
-	@Test
-	public void testDarDeAltaLlamada() {
-		assertTrue(gestion.darDeAltaLlamada(cliente.getNIF(), llamada1));
-		assertTrue(gestion.darDeAltaLlamada(cliente.getNIF(), llamada2));
-		assertTrue(gestion.darDeAltaLlamada(cliente.getNIF(), llamada3));
-		
-	}
-	
-	@Test
-	public void testListarLlamadasCliente() {
-		gestion.darDeAltaLlamada(cliente.getNIF(), llamada1);
-		gestion.darDeAltaLlamada(cliente.getNIF(), llamada2);
-		gestion.darDeAltaLlamada(cliente.getNIF(), llamada3);
-				 
-		 assertNotNull(gestion.listarLlamadasCliente(cliente.getNIF()));
 	}
 
 }
