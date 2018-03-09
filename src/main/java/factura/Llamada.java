@@ -25,7 +25,7 @@ public class Llamada implements Fecha{
 		this.duracion = llamada.duracion;
 	}
 	
-	public int getDuracion() {
+	public double getDuracion() {
 		return this.duracion;
 	}
 	
