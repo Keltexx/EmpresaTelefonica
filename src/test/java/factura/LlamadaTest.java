@@ -35,7 +35,7 @@ public class LlamadaTest {
 				"empresa@empresa.com",Calendar.getInstance(),new Tarifa(5));
 		llamada1= new Llamada(666777888,Calendar.getInstance(),Calendar.getInstance(),2);
 		llamada2= new Llamada(666777888,Calendar.getInstance(),Calendar.getInstance(),6);
-		llamada1= new Llamada(777888999,Calendar.getInstance(),Calendar.getInstance(),3);
+		llamada3= new Llamada(777888999,Calendar.getInstance(),Calendar.getInstance(),3);
 		gestion.darDeAltaCliente(cliente);
 	}
 	

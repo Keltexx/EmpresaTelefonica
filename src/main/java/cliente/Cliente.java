@@ -52,7 +52,7 @@ public class Cliente implements Fecha {
 		this.tarifa = tarifa;
 	}
 	
-	public Cliente pedirDatosCliente() {
+	public static Cliente pedirDatosCliente() {
 		System.out.println("Introducir datos cliente: ");
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Introduce nombre: ");
@@ -72,11 +72,11 @@ public class Cliente implements Fecha {
 		System.out.println("Introduce fecha de alta: ");
 		System.out.println("	-Año: ");
 		int año = scan.nextInt();
-		System.out.println("	-Mes: ");
+		System.out.println("	-Mes (numérico): ");
 		int mes = scan.nextInt();
 		System.out.println("	-Día: ");
 		int dia = scan.nextInt();
-		Calendar fecha = null;
+		Calendar fecha = Calendar.getInstance();
 		fecha.set(año, mes, dia);
 		System.out.println("Introduce tarifa: ");
 		double importe = scan.nextDouble();
