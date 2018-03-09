@@ -67,11 +67,10 @@ public class Gestion {
 	//OPERACIONES DE LAS LLAMADAS
 	
 	public boolean darDeAltaLlamada(String nif, Llamada llamada){
-		if(this.llamadas.containsKey(nif)){
-			this.llamadas.get(nif).add(llamada);
-			return true;
-		}
-		return false;
+		if(!this.llamadas.containsKey(nif))
+			this.llamadas.put(nif, new ArrayList<Llamada>());
+		this.llamadas.get(nif).add(llamada);
+		return true;
 	}
 	
 	public List<Llamada> listarLlamadasCliente(String nif){
