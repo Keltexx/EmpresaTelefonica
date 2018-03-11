@@ -18,10 +18,10 @@ public class Consola {
 	}
 	
 	public static Tarifa pedirTarifa() {
-		Scanner scanner = new Scanner(System.in);
+		Scanner scan= new Scanner(System.in);
 		System.out.print("Introduce nueva tarifa:");
-		Tarifa tarifa = new Tarifa(scanner.nextDouble());
-		scanner.close();
+		Tarifa tarifa = new Tarifa(scan.nextDouble());
+		scan.close();
 		return tarifa;
 	}
 	
