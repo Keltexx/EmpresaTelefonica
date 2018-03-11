@@ -1,7 +1,6 @@
 package main;
 
 import java.util.Scanner;
-
 import gestion.Gestion;
 
 public class Main {
