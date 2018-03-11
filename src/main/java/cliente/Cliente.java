@@ -52,39 +52,7 @@ public class Cliente implements Fecha {
 		this.tarifa = tarifa;
 	}
 	
-	public static Cliente pedirDatosCliente() {
-		System.out.println("Introducir datos cliente: ");
-		Scanner scan = new Scanner(System.in);
-		System.out.println("Introduce nombre: ");
-		String nombre = scan.next();
-		System.out.println("Introduce NIF: ");
-		String nif = scan.next();
-		System.out.println("Introduce dirección: ");
-		System.out.println("	-Código Postal: ");
-		int codP = scan.nextInt();
-		System.out.println("	-Provincia: ");
-		String prov = scan.next();
-		System.out.println("	-Población: ");
-		String pob = scan.next();
-		Direccion dir = new Direccion(codP,prov,pob);
-		System.out.println("Introduce correo: ");
-		String correo = scan.next();
-		System.out.println("Introduce fecha de alta: ");
-		System.out.println("	-Año: ");
-		int año = scan.nextInt();
-		System.out.println("	-Mes (numérico): ");
-		int mes = scan.nextInt();
-		System.out.println("	-Día: ");
-		int dia = scan.nextInt();
-		Calendar fecha = Calendar.getInstance();
-		fecha.set(año, mes, dia);
-		System.out.println("Introduce tarifa: ");
-		double importe = scan.nextDouble();
-		Tarifa tarifa = new Tarifa(importe);
-		Cliente cliente = new Cliente(nombre,nif,dir,correo,fecha,tarifa);
-		scan.close();
-		return cliente;
-	}
+
 	
 	
 }
