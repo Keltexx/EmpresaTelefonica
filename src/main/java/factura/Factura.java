@@ -42,4 +42,17 @@ public class Factura implements Fecha{
 		return codigo == factura.codigo && Double.compare(factura.importe, importe)
 				== 0 && Objects.equals(tarifa.getImporte(), factura.tarifa.getImporte());
 	}
+	
+	public int getCodigo() {
+		return this.codigo;
+	}
+	
+	public Tarifa getTarifa() {
+		return this.tarifa;
+	}
+	
+	public double getImporte() {
+		return this.importe;
+	}
+	
 }

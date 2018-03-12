@@ -33,7 +33,7 @@ public class FacturaTest {
 		generador = new GeneradorDatosINE();
 		cliente= new Cliente(generador.getNombre(), generador.getNIF(),
 				new Direccion(12345, generador.getPoblacion(generador.getProvincia()), generador.getProvincia()),
-				"empresa@empresa.com",Calendar.getInstance(),new Tarifa(5));
+				"empresa@empresa.com",Calendar.getInstance(),new Tarifa(10));
 		llamada1= new Llamada(666777888,Calendar.getInstance(),Calendar.getInstance(),20);
 		llamada2= new Llamada(666777888,Calendar.getInstance(),Calendar.getInstance(),10);
 		llamada3= new Llamada(777888999,Calendar.getInstance(),Calendar.getInstance(),18);
@@ -44,7 +44,8 @@ public class FacturaTest {
 		periodo.add(Calendar.getInstance());
 		periodo.get(0).set(Calendar.MONTH, periodo.get(0).get(Calendar.MONTH) - 1);
 		
-		factura = new Factura(0,new Tarifa(10),Calendar.getInstance(),periodo,8);
+		Calendar fechaFacturacion = periodo.get(0);
+		factura = new Factura(0,new Tarifa(10),fechaFacturacion,periodo,8);
 		
 		gestion.darDeAltaLlamada(cliente.getNIF(), llamada1);
 		gestion.darDeAltaLlamada(cliente.getNIF(), llamada2);
@@ -64,9 +65,13 @@ public class FacturaTest {
 
 	@Test
 	public void testEmitirFactura() {
-		Factura aux = gestion.emitirFactura(cliente.getNIF(), Calendar.getInstance());
+		Calendar fechaFacturacion = Calendar.getInstance();
+		fechaFacturacion.set(Calendar.MONTH, fechaFacturacion.get(Calendar.MONTH)-1);
+		Factura aux = gestion.emitirFactura(cliente.getNIF(), fechaFacturacion);
 		
-		assertEquals(factura,aux);
+		assertEquals(factura.getCodigo(),aux.getCodigo());
+		assertEquals(factura.getTarifa().getImporte(),aux.getTarifa().getImporte(),1);
+		assertEquals(factura.getImporte(),aux.getImporte(),1);
 	}
 	
 }

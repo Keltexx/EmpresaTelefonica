@@ -98,7 +98,7 @@ public class Gestion {
 				duracionLlamadas += llamada.getDuracion();
 		}
 		
-		double importe = (duracionLlamadas / 60) * tarifa.getImporte();		
+		double importe = (tarifa.getImporte() / 60) * duracionLlamadas;		
 		
 		Factura factura = new Factura(codigo, tarifa, fechaEmision, periodoFacturacion, importe);
 		
