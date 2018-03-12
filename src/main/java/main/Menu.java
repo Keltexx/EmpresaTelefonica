@@ -1,6 +1,6 @@
 package main;
 
-import java.util.Scanner;
+
 
 public enum Menu {
 	ALTA_CLIENTE("Dar de alta un nuevo cliente"),

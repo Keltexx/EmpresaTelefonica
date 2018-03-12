@@ -12,10 +12,18 @@ public class Particular extends Cliente{
 	
 	public Particular(String nombre,String apellidos, String nif,Direccion dir, String correo, Calendar fecha, Tarifa tarifa) {
 		super(nombre,nif,dir,correo,fecha,tarifa);
-		this.apellidos=apellidos;
+		this.setApellidos(apellidos);
 	}
 	
 	public Particular(Particular otro) {
 		super(otro);
+	}
+
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
 	}
 }

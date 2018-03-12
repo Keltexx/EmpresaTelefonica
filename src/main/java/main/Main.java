@@ -140,7 +140,7 @@ public class Main {
 			break;
 		case RECUPERAR_DATOS_FACTURA:
 			System.out.print("Introduce código de factura: ");
-			Integer cod = scan.nextInt();
+			int cod = scan.nextInt();
 			gestion.recuperarDatosFacturaCodigo(cod);
 			break;
 		case RECUPERAR_FACTURAS:

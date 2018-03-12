@@ -5,10 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
+
 
 import es.uji.www.GeneradorDatosINE;
-import factura.*;
 import gestion.Gestion;
 
 
@@ -16,7 +15,7 @@ import java.util.Calendar;
 
 import cliente.Cliente;
 import cliente.Direccion;
-import cliente.Empresa;
+
 
 public class LlamadaTest {
 	private Gestion gestion;
