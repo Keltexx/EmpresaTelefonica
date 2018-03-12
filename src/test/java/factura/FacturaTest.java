@@ -74,4 +74,26 @@ public class FacturaTest {
 		assertEquals(factura.getImporte(),aux.getImporte(),1);
 	}
 	
+	@Test
+	public void testRecuperarDatosFacturaCodigo() {
+		assertNull(gestion.recuperarDatosFacturaCodigo(0));
+		
+		Calendar fechaFacturacion = Calendar.getInstance();
+		fechaFacturacion.set(Calendar.MONTH, fechaFacturacion.get(Calendar.MONTH)-1);
+		gestion.emitirFactura(cliente.getNIF(), fechaFacturacion);
+		
+		assertNotNull(gestion.recuperarDatosFacturaCodigo(0));
+	}
+	
+	@Test
+	public void testRecuperarFacturas() {
+		assertNull(gestion.recuperarFacturas(cliente.getNIF()));
+		
+		Calendar fechaFacturacion = Calendar.getInstance();
+		fechaFacturacion.set(Calendar.MONTH, fechaFacturacion.get(Calendar.MONTH)-1);
+		gestion.emitirFactura(cliente.getNIF(), fechaFacturacion);
+		
+		assertNotNull(gestion.recuperarFacturas(cliente.getNIF()));
+	}
+	
 }
