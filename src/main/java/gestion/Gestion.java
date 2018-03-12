@@ -13,14 +13,14 @@ import factura.Tarifa;
 public class Gestion {
 	private HashMap<String, Cliente> clientes;
 	private HashMap<String, List<Factura>> facturas;
-	private HashMap<String, Factura> facturasCodigo;
+	private HashMap<Integer, Factura> facturasCodigo;
 	private HashMap<String, List<Llamada>> llamadas;
 	
 	
 	public Gestion(){
 		clientes = new HashMap<String, Cliente>();
 		facturas = new HashMap<String, List<Factura>>();
-		facturasCodigo = new HashMap<String, Factura>();
+		facturasCodigo = new HashMap<Integer, Factura>();
 		llamadas = new HashMap<String, List<Llamada>>();
 	}
 	
@@ -102,14 +102,17 @@ public class Gestion {
 		
 		Factura factura = new Factura(codigo, tarifa, fechaEmision, periodoFacturacion, importe);
 		
+		if(this.facturas.get(nif) == null)
+			this.facturas.put(nif, new ArrayList<Factura>());
+		
 		this.facturas.get(nif).add(factura);
-		this.facturasCodigo.put(nif, factura);
+		this.facturasCodigo.put(codigo, factura);
 		
 		return factura;
 		
 	}
 	
-	public Factura recuperarDatosFacturaCodigo(String codigo){
+	public Factura recuperarDatosFacturaCodigo(Integer codigo){
 		if(this.facturasCodigo.containsKey(codigo))
 			return this.facturasCodigo.get(codigo);
 		

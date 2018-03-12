@@ -34,9 +34,9 @@ public class FacturaTest {
 		cliente= new Cliente(generador.getNombre(), generador.getNIF(),
 				new Direccion(12345, generador.getPoblacion(generador.getProvincia()), generador.getProvincia()),
 				"empresa@empresa.com",Calendar.getInstance(),new Tarifa(5));
-		llamada1= new Llamada(666777888,Calendar.getInstance(),Calendar.getInstance(),2);
-		llamada2= new Llamada(666777888,Calendar.getInstance(),Calendar.getInstance(),6);
-		llamada3= new Llamada(777888999,Calendar.getInstance(),Calendar.getInstance(),3);
+		llamada1= new Llamada(666777888,Calendar.getInstance(),Calendar.getInstance(),20);
+		llamada2= new Llamada(666777888,Calendar.getInstance(),Calendar.getInstance(),10);
+		llamada3= new Llamada(777888999,Calendar.getInstance(),Calendar.getInstance(),18);
 		gestion.darDeAltaCliente(cliente);
 		
 		ArrayList<Calendar> periodo = new ArrayList<Calendar>();
@@ -44,7 +44,7 @@ public class FacturaTest {
 		periodo.add(Calendar.getInstance());
 		periodo.get(0).set(Calendar.MONTH, periodo.get(0).get(Calendar.MONTH) - 1);
 		
-		factura = new Factura(0,new Tarifa(10),Calendar.getInstance(),periodo,300);
+		factura = new Factura(0,new Tarifa(10),Calendar.getInstance(),periodo,8);
 		
 		gestion.darDeAltaLlamada(cliente.getNIF(), llamada1);
 		gestion.darDeAltaLlamada(cliente.getNIF(), llamada2);

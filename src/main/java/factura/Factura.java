@@ -2,6 +2,7 @@ package factura;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Objects;
 
 import interfaces.Fecha;
 
@@ -31,5 +32,14 @@ public class Factura implements Fecha{
 	
 	public Calendar getFecha(){
 		return fechaEmision;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if(this == o ) return true;
+		if(!(o instanceof Factura)) return false;
+		Factura factura = (Factura) o;
+		return codigo == factura.codigo && Double.compare(factura.importe, importe)
+				== 0 && Objects.equals(tarifa.getImporte(), factura.tarifa.getImporte());
 	}
 }
