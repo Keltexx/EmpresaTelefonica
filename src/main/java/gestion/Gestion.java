@@ -2,6 +2,7 @@ package gestion;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import cliente.Cliente;
 import factura.Factura;
 import factura.Llamada;
 import factura.Tarifa;
+import fecha.FechaGenerico;
 
 public class Gestion {
 	private HashMap<String, Cliente> clientes;
@@ -64,6 +66,14 @@ public class Gestion {
 	}
 	
 	
+	public Collection<Cliente> mostrarListadoClientesFechas(Calendar fechaInicio, Calendar fechaFin){
+		Collection<Cliente> clientes = this.clientes.values();
+		clientes = FechaGenerico.getConjuntoPorFecha(clientes, fechaInicio, fechaFin);
+		return clientes;
+	}
+	
+	
+	
 	//OPERACIONES DE LAS LLAMADAS
 	
 	public boolean darDeAltaLlamada(String nif, Llamada llamada){
@@ -80,6 +90,12 @@ public class Gestion {
 		return null;
 	}
 	
+	
+	public Collection<Llamada> mostrarListadoLlamadasFechas(String nif, Calendar fechaInicio, Calendar fechaFin){
+		Collection<Llamada> llamadas = this.llamadas.get(nif);
+		llamadas = FechaGenerico.getConjuntoPorFecha(llamadas, fechaInicio, fechaFin);
+		return llamadas;
+	}
 	
 	//OPERACIONES DE LAS FACTURAS
 	
@@ -124,6 +140,13 @@ public class Gestion {
 			return this.facturas.get(nif);
 		
 		return null;
+	}
+	
+	
+	public Collection<Factura> mostrarListadoFacturasFechas(String nif, Calendar fechaInicio, Calendar fechaFin){
+		Collection<Factura> facturas = this.facturas.get(nif);
+		facturas = FechaGenerico.getConjuntoPorFecha(facturas, fechaInicio, fechaFin);
+		return facturas;
 	}
 	
 }
