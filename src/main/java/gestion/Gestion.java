@@ -1,5 +1,6 @@
 package gestion;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -12,7 +13,11 @@ import factura.Llamada;
 import factura.Tarifa;
 import fecha.FechaGenerico;
 
-public class Gestion {
+public class Gestion implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2108257942382069823L;
 	private HashMap<String, Cliente> clientes;
 	private HashMap<String, List<Factura>> facturas;
 	private HashMap<Integer, Factura> facturasCodigo;
