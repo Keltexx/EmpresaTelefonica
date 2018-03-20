@@ -12,6 +12,7 @@ import factura.Factura;
 import factura.Llamada;
 import factura.Tarifa;
 import fecha.FechaGenerico;
+import excepciones.*;
 
 public class Gestion implements Serializable{
 	/**
@@ -33,37 +34,36 @@ public class Gestion implements Serializable{
 	
 	//OPERACIONES DEL CLIENTE
 	
-	public boolean darDeAltaCliente(Cliente cliente){
+	public boolean darDeAltaCliente(Cliente cliente) throws ExcepcionClienteYaRegistrado{
 		String nif = cliente.getNIF();
 		if(!this.clientes.containsKey(nif)){
 			this.clientes.put(nif, cliente);
 			return true;
 		}
-		return false;
+		throw new ExcepcionClienteYaRegistrado();
 	}
 	
-	public boolean borrarCliente(Cliente cliente){
-		String nif = cliente.getNIF();
+	public boolean borrarCliente(String nif) throws ExcepcionClienteNoEncontrado{
 		if(this.clientes.containsKey(nif)){
 			this.clientes.remove(nif);
 			return true;
 		}
-		return false;
+		throw new ExcepcionClienteNoEncontrado();
 	}
 	
-	public boolean cambiarTarifa(String nif, Tarifa tarifa){
+	public boolean cambiarTarifa(String nif, Tarifa tarifa) throws ExcepcionClienteNoEncontrado{
 		if(this.clientes.containsKey(nif)){
 			this.clientes.get(nif).setTarifa(tarifa);
 			return true;
 		}
-		return false;
-	}
+		throw new ExcepcionClienteNoEncontrado();
+}
 	
-	public Cliente recuperarDatosNIF(String nif){
+	public Cliente recuperarDatosNIF(String nif) throws ExcepcionClienteNoEncontrado{
 		if(this.clientes.containsKey(nif)){
 			return this.clientes.get(nif);
 		}
-		return null;
+		throw new ExcepcionClienteNoEncontrado();
 	}
 	
 	public HashMap<String,Cliente> recuperarListadoClientes(){
