@@ -5,12 +5,14 @@ import java.util.Scanner;
 
 import cliente.Cliente;
 import cliente.Direccion;
+import excepciones.ExcepcionClienteNoEncontrado;
+import excepciones.ExcepcionClienteYaRegistrado;
 import factura.Llamada;
 import factura.Tarifa;
 import gestion.Gestion;
 
 public class Main {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ExcepcionClienteYaRegistrado, ExcepcionClienteNoEncontrado {
 		Gestion gestion = new Gestion();			
 		System.out.println(Menu.getMenu());
 		Scanner scan = new Scanner(System.in);
@@ -49,34 +51,9 @@ public class Main {
 			gestion.darDeAltaCliente(cliente);
 			break;
 		case BORRAR_CLIENTE:
-			System.out.println("Introducir datos cliente: ");
-			System.out.print("Introduce nombre: ");
-			nombre = scan.next();
 			System.out.print("Introduce NIF: ");
-			nif = scan.next();
-			System.out.println("Introduce dirección: ");
-			System.out.print("	-Código Postal: ");
-			codP = scan.nextInt();
-			System.out.print("	-Provincia: ");
-			prov = scan.next();
-			System.out.print("	-Población: ");
-			pob = scan.next();
-			dir = new Direccion(codP,prov,pob);
-			System.out.print("Introduce correo: ");
-			correo = scan.next();
-			System.out.println("Introduce fecha de alta: ");
-			System.out.print("	-Año: ");
-			año = scan.nextInt();
-			System.out.print("	-Mes (numérico): ");
-			mes = scan.nextInt();
-			System.out.print("	-Día: ");
-			dia = scan.nextInt();
-			Calendar fecha2 = Calendar.getInstance();
-			fecha2.set(año, mes, dia);
-			System.out.print("Introduce tarifa: ");
-			tarifa = new Tarifa(scan.nextDouble());
-			cliente = new Cliente(nombre,nif,dir,correo,fecha2,tarifa);
-			gestion.borrarCliente(cliente);
+			nif = scan.next();		
+			gestion.borrarCliente(nif);
 			break;
 		case CAMBIAR_TARIFA:
 			System.out.print("Introduce NIF: ");
