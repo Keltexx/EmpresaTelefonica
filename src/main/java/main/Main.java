@@ -93,7 +93,7 @@ public class Main {
 			System.out.print("Introduce duración: ");
 			int dur=scan.nextInt();
 			
-			Llamada llamada = new Llamada(num, fecha, hora, dur);
+			Llamada llamada = new Llamada(num, fecha, dur);
 			gestion.darDeAltaLlamada(nif, llamada);
 			break;
 		case LISTAR_LLAMADAS:
