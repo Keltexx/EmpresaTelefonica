@@ -109,9 +109,6 @@ public class Gestion implements Serializable {
 		int codigo = this.facturasCodigo.size();
 		Tarifa tarifa = this.clientes.get(nif).getTarifa();
 		Calendar fechaEmision = Calendar.getInstance();
-		ArrayList<Calendar> periodoFacturacion = new ArrayList<Calendar>();
-		periodoFacturacion.add(fechaFacturacion);
-		periodoFacturacion.add(fechaEmision);
 
 		int duracionLlamadas = 0;
 		List<Llamada> listaLlamadas = this.llamadas.get(nif);
@@ -122,7 +119,7 @@ public class Gestion implements Serializable {
 
 		double importe = (tarifa.getImporte() / 60) * duracionLlamadas;
 
-		Factura factura = new Factura(codigo, tarifa, fechaEmision, periodoFacturacion, importe);
+		Factura factura = new Factura(codigo, tarifa, fechaEmision, importe);
 
 		if (this.facturas.get(nif) == null)
 			this.facturas.put(nif, new ArrayList<Factura>());
