@@ -1,6 +1,5 @@
 package factura;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
 
@@ -15,7 +14,7 @@ public class Factura implements Fecha{
 	public Factura(int codigo, Tarifa tarifa, Calendar fechaEmision, double importe){
 		this.tarifa = tarifa;
 		this.codigo = codigo;
-		this.fechaEmision = Calendar.getInstance();
+		this.fechaEmision = fechaEmision;
 		this.importe = importe;
 	}
 	

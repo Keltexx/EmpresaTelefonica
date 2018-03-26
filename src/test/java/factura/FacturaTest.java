@@ -8,10 +8,9 @@ import org.junit.Before;
 
 
 import es.uji.www.GeneradorDatosINE;
-
+import excepciones.ExcepcionClienteYaRegistrado;
 import gestion.Gestion;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import cliente.Cliente;
@@ -28,24 +27,21 @@ public class FacturaTest {
 	private Factura factura;
 
 	@Before
-	public void init() {
+	public void init() throws ExcepcionClienteYaRegistrado {
 		gestion=new Gestion();
 		generador = new GeneradorDatosINE();
 		cliente= new Cliente(generador.getNombre(), generador.getNIF(),
 				new Direccion(12345, generador.getPoblacion(generador.getProvincia()), generador.getProvincia()),
 				"empresa@empresa.com",Calendar.getInstance(),new Tarifa(10));
-		llamada1= new Llamada(666777888,Calendar.getInstance(),Calendar.getInstance(),20);
-		llamada2= new Llamada(666777888,Calendar.getInstance(),Calendar.getInstance(),10);
-		llamada3= new Llamada(777888999,Calendar.getInstance(),Calendar.getInstance(),18);
+		llamada1= new Llamada(666777888,Calendar.getInstance(),20);
+		llamada2= new Llamada(666777888,Calendar.getInstance(),10);
+		llamada3= new Llamada(777888999,Calendar.getInstance(),18);
 		gestion.darDeAltaCliente(cliente);
 		
-		ArrayList<Calendar> periodo = new ArrayList<Calendar>();
-		periodo.add(Calendar.getInstance());
-		periodo.add(Calendar.getInstance());
-		periodo.get(0).set(Calendar.MONTH, periodo.get(0).get(Calendar.MONTH) - 1);
 		
-		Calendar fechaFacturacion = periodo.get(0);
-		factura = new Factura(0,new Tarifa(10),fechaFacturacion,periodo,8);
+		Calendar fechaFacturacion = Calendar.getInstance();
+		fechaFacturacion.set(Calendar.MONTH, fechaFacturacion.get(Calendar.MONTH) - 1);
+		factura = new Factura(0,new Tarifa(10),fechaFacturacion,8);
 		
 		gestion.darDeAltaLlamada(cliente.getNIF(), llamada1);
 		gestion.darDeAltaLlamada(cliente.getNIF(), llamada2);

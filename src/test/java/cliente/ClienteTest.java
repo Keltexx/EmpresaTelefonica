@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import es.uji.www.GeneradorDatosINE;
+import excepciones.ExcepcionClienteNoEncontrado;
+import excepciones.ExcepcionClienteYaRegistrado;
 import factura.*;
 import gestion.Gestion;
 
@@ -52,7 +54,7 @@ public class ClienteTest {
 	}
 	
 	@Test
-	public void testDarDeAltaCliente() {
+	public void testDarDeAltaCliente() throws ExcepcionClienteYaRegistrado {
 		assertTrue(gestion.darDeAltaCliente(empresa));
 		assertTrue(gestion.darDeAltaCliente(particular));
 		assertTrue(gestion.darDeAltaCliente(hombre));
@@ -60,20 +62,20 @@ public class ClienteTest {
 	}
 	
 	@Test
-	public void testBorrarCliente() {
+	public void testBorrarCliente() throws ExcepcionClienteYaRegistrado, ExcepcionClienteNoEncontrado {
 		gestion.darDeAltaCliente(empresa);
 		gestion.darDeAltaCliente(particular);
 		gestion.darDeAltaCliente(hombre);
 		gestion.darDeAltaCliente(mujer);
 		
-		assertTrue(gestion.borrarCliente(empresa));
-		assertTrue(gestion.borrarCliente(particular));
-		assertTrue(gestion.borrarCliente(hombre));
-		assertTrue(gestion.borrarCliente(mujer));
+		assertTrue(gestion.borrarCliente(empresa.getNIF()));
+		assertTrue(gestion.borrarCliente(particular.getNIF()));
+		assertTrue(gestion.borrarCliente(hombre.getNIF()));
+		assertTrue(gestion.borrarCliente(mujer.getNIF()));
 	}
 	
 	@Test
-	public void testCambiarTarifa() {
+	public void testCambiarTarifa() throws ExcepcionClienteYaRegistrado, ExcepcionClienteNoEncontrado {
 		gestion.darDeAltaCliente(empresa);
 		gestion.darDeAltaCliente(particular);
 		gestion.darDeAltaCliente(hombre);
@@ -86,7 +88,7 @@ public class ClienteTest {
 	}
 	
 	@Test 
-	public void testRecuperarDatosNIF() {
+	public void testRecuperarDatosNIF() throws ExcepcionClienteYaRegistrado, ExcepcionClienteNoEncontrado {
 		gestion.darDeAltaCliente(empresa);
 		gestion.darDeAltaCliente(particular);
 		gestion.darDeAltaCliente(hombre);
@@ -100,7 +102,7 @@ public class ClienteTest {
 	}
 	
 	@Test
-	public void testRecuperarListadoClientes() {
+	public void testRecuperarListadoClientes() throws ExcepcionClienteYaRegistrado {
 		gestion.darDeAltaCliente(empresa);
 		gestion.darDeAltaCliente(particular);
 		gestion.darDeAltaCliente(hombre);
