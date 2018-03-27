@@ -12,7 +12,10 @@ public enum Menu {
 	LISTAR_LLAMADAS("Listar todas las llamadas de un cliente"),
 	EMITIR_FACTURA("Calcular factura"),
 	RECUPERAR_DATOS_FACTURA("Recuperar los datos de una factura"),
-	RECUPERAR_FACTURAS("Recuperar todas las facturas");
+	RECUPERAR_FACTURAS("Recuperar todas las facturas"),
+	MOSTRAR_LISTADO_CLIENTES_FECHAS("Mostrar un listado de clientes que fueron dados de alta entre dos fechas"),
+	MOSTRAR_LISTADO_LLAMADAS_FECHAS("Mostrar un listado de llamadas de un cliente que fueron realizadas entre dos fechas"),
+	MOSTRAR_LISTADO_FACTURAS_FECHAS("Mostrar un listado de facturas emitidas entre dos fechas");
 	
 	private String descripcion;
 	

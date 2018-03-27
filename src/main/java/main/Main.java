@@ -1,10 +1,12 @@
 package main;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Scanner;
 
 import cliente.Cliente;
 import cliente.Direccion;
+import consola.Consola;
 import excepciones.ExcepcionClienteNoEncontrado;
 import excepciones.ExcepcionClienteYaRegistrado;
 import factura.Llamada;
@@ -12,8 +14,21 @@ import factura.Tarifa;
 import gestion.Gestion;
 
 public class Main {
-	public static void main(String[] args) throws ExcepcionClienteYaRegistrado, ExcepcionClienteNoEncontrado {
-		Gestion gestion = new Gestion();			
+	Consola consola = new Consola();
+	Gestion gestion = new Gestion();
+	
+	private void start() throws IOException {
+		gestion.cargarDatos();
+		mostrarMenu();
+		gestion.guardarDatos();
+	}
+	
+	public static void main(String[] args) throws IOException  {
+		new Main().start();
+	}
+
+		
+	private void mostrarMenu() {	
 		System.out.println(Menu.getMenu());
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Elige una opción:");
@@ -21,34 +36,7 @@ public class Main {
 		Menu menu = Menu.getOpcion(opcion);
 		switch (menu) {
 		case ALTA_CLIENTE:
-			System.out.println("Introducir datos cliente: ");
-			System.out.print("Introduce nombre: ");
-			String nombre = scan.next();
-			System.out.print("Introduce NIF: ");
-			String nif = scan.next();
-			System.out.println("Introduce dirección: ");
-			System.out.print("	-Código Postal: ");
-			int codP = scan.nextInt();
-			System.out.print("	-Provincia: ");
-			String prov = scan.next();
-			System.out.print("	-Población: ");
-			String pob = scan.next();
-			Direccion dir = new Direccion(codP,prov,pob);
-			System.out.print("Introduce correo: ");
-			String correo = scan.next();
-			System.out.println("Introduce fecha de alta: ");
-			System.out.print("	-Año: ");
-			int año = scan.nextInt();
-			System.out.print("	-Mes (numérico): ");
-			int mes = scan.nextInt();
-			System.out.print("	-Día: ");
-			int dia = scan.nextInt();
-			Calendar fecha = Calendar.getInstance();
-			fecha.set(año, mes, dia);
-			System.out.print("Introduce tarifa: ");
-			Tarifa tarifa = new Tarifa(scan.nextDouble());
-			Cliente cliente = new Cliente(nombre,nif,dir,correo,fecha,tarifa);
-			gestion.darDeAltaCliente(cliente);
+			darAltaCliente();
 			break;
 		case BORRAR_CLIENTE:
 			System.out.print("Introduce NIF: ");
@@ -130,4 +118,38 @@ public class Main {
 		System.out.println("Ok");
 		scan.close();
 	}
+	
+
+	
+	
+	private void darAltaCliente() {
+		consola.mostrarDato("Introducir datos cliente: ");
+		String nombre = consola.pedirDato("Introduce nombre: ");
+		System.out.print("Introduce NIF: ");
+		String nif = scan.next();
+		System.out.println("Introduce dirección: ");
+		System.out.print("	-Código Postal: ");
+		int codP = scan.nextInt();
+		System.out.print("	-Provincia: ");
+		String prov = scan.next();
+		System.out.print("	-Población: ");
+		String pob = scan.next();
+		Direccion dir = new Direccion(codP,prov,pob);
+		System.out.print("Introduce correo: ");
+		String correo = scan.next();
+		System.out.println("Introduce fecha de alta: ");
+		System.out.print("	-Año: ");
+		int año = scan.nextInt();
+		System.out.print("	-Mes (numérico): ");
+		int mes = scan.nextInt();
+		System.out.print("	-Día: ");
+		int dia = scan.nextInt();
+		Calendar fecha = Calendar.getInstance();
+		fecha.set(año, mes, dia);
+		System.out.print("Introduce tarifa: ");
+		Tarifa tarifa = new Tarifa(scan.nextDouble());
+		Cliente cliente = new Cliente(nombre,nif,dir,correo,fecha,tarifa);
+		gestion.darDeAltaCliente(cliente);
+	}
+	
 }
