@@ -2,8 +2,6 @@ package main;
 
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.Scanner;
-
 import cliente.Cliente;
 import cliente.Direccion;
 import consola.Consola;
@@ -17,137 +15,141 @@ public class Main {
 	Consola consola = new Consola();
 	Gestion gestion = new Gestion();
 	
-	private void start() throws IOException {
+	private void start() throws IOException, ExcepcionClienteNoEncontrado, ExcepcionClienteYaRegistrado {
 		gestion.cargarDatos();
 		mostrarMenu();
 		gestion.guardarDatos();
 	}
 	
-	public static void main(String[] args) throws IOException  {
+	public static void main(String[] args) throws IOException, ExcepcionClienteNoEncontrado, ExcepcionClienteYaRegistrado  {
 		new Main().start();
 	}
 
 		
-	private void mostrarMenu() {	
-		System.out.println(Menu.getMenu());
-		Scanner scan = new Scanner(System.in);
-		System.out.print("Elige una opción:");
-		byte opcion = scan.nextByte();
+	private void mostrarMenu() throws ExcepcionClienteNoEncontrado, ExcepcionClienteYaRegistrado {	
+		consola.mostrarDato(Menu.getMenu());
+		byte opcion = Byte.parseByte(consola.pedirDato("Elige una opción:"));
 		Menu menu = Menu.getOpcion(opcion);
 		switch (menu) {
 		case ALTA_CLIENTE:
 			darAltaCliente();
 			break;
 		case BORRAR_CLIENTE:
-			System.out.print("Introduce NIF: ");
-			nif = scan.next();		
-			gestion.borrarCliente(nif);
+			borrarCliente();
 			break;
 		case CAMBIAR_TARIFA:
-			System.out.print("Introduce NIF: ");
-			nif = scan.next();
-			System.out.print("Introduce tarifa: ");
-			tarifa = new Tarifa(scan.nextDouble());
-			gestion.cambiarTarifa(nif, tarifa);
+			cambiarTarifa();
 			break;
 		case RECUPERAR_CLIENTE_NIF:
-			System.out.print("Introduce NIF: ");
-			nif = scan.next();
-			gestion.recuperarDatosNIF(nif);
+			recuperarCliente();
 			break;
 		case RECUPERAR_TODOS:
 			gestion.recuperarListadoClientes();
 			break;
 		case DAR_ALTA_LLAMADA:
-			System.out.print("Introduce NIF: ");
-			nif = scan.next();
-			System.out.print("Introduce el número de teléfono: ");
-			int num =scan.nextInt();
-			System.out.println("Introduce fecha: ");
-			System.out.print("	-Año: ");
-			año = scan.nextInt();
-			System.out.print("	-Mes (numérico): ");
-			mes = scan.nextInt();
-			System.out.print("	-Día: ");
-			dia = scan.nextInt();
-			fecha = Calendar.getInstance();
-			fecha.set(año, mes, dia);
-			System.out.print("Introduce hora: ");
-			int hor = scan.nextInt();
-			System.out.print("Introduce minuto: ");
-			int min = scan.nextInt();
-			Calendar hora = Calendar.getInstance();
-			hora.set(año, mes, dia, hor, min);
-			System.out.print("Introduce duración: ");
-			int dur=scan.nextInt();
-			
-			Llamada llamada = new Llamada(num, fecha, dur);
-			gestion.darDeAltaLlamada(nif, llamada);
+			darAltaLlamada();
 			break;
 		case LISTAR_LLAMADAS:
-			System.out.print("Introduce NIF: ");
-			nif = scan.next();
-			gestion.listarLlamadasCliente(nif);
+			listarLlamadas();
 			break;
 		case EMITIR_FACTURA:
-			System.out.print("Introduce NIF: ");
-			nif = scan.next();
-			System.out.println("Introduce fecha: ");
-			System.out.print("	-Año: ");
-			año = scan.nextInt();
-			System.out.print("	-Mes (numérico): ");
-			mes = scan.nextInt();
-			System.out.print("	-Día: ");
-			dia = scan.nextInt();
-			fecha = Calendar.getInstance();
-			fecha.set(año, mes, dia);
-			gestion.emitirFactura(nif, fecha);
+			emitirFactura();
 			break;
 		case RECUPERAR_DATOS_FACTURA:
-			System.out.print("Introduce código de factura: ");
-			int cod = scan.nextInt();
-			gestion.recuperarDatosFacturaCodigo(cod);
+			recuperarDatosFactura();
 			break;
 		case RECUPERAR_FACTURAS:
-			System.out.print("Introduce NIF: ");
-			nif = scan.next();
-			gestion.recuperarFacturas(nif);
+			recuperarFacturas();
 		default:
 			break;
 		}
-		System.out.println("Ok");
-		scan.close();
+		consola.mostrarDato("Ok");
 	}
-	
 
-	
-	
-	private void darAltaCliente() {
-		consola.mostrarDato("Introducir datos cliente: ");
-		String nombre = consola.pedirDato("Introduce nombre: ");
-		System.out.print("Introduce NIF: ");
-		String nif = scan.next();
-		System.out.println("Introduce dirección: ");
-		System.out.print("	-Código Postal: ");
-		int codP = scan.nextInt();
-		System.out.print("	-Provincia: ");
-		String prov = scan.next();
-		System.out.print("	-Población: ");
-		String pob = scan.next();
-		Direccion dir = new Direccion(codP,prov,pob);
-		System.out.print("Introduce correo: ");
-		String correo = scan.next();
-		System.out.println("Introduce fecha de alta: ");
-		System.out.print("	-Año: ");
-		int año = scan.nextInt();
-		System.out.print("	-Mes (numérico): ");
-		int mes = scan.nextInt();
-		System.out.print("	-Día: ");
-		int dia = scan.nextInt();
+	private void recuperarFacturas() {
+		String nif = consola.pedirDato("Introduce NIF: ");
+		gestion.recuperarFacturas(nif);
+	}
+
+	private void recuperarDatosFactura() {
+		int cod = Integer.parseInt(consola.pedirDato("Introduce código de factura: "));
+		gestion.recuperarDatosFacturaCodigo(cod);
+	}
+
+	private void emitirFactura() {
+		String nif = consola.pedirDato("Introduce NIF: ");
+		consola.mostrarDato("Introduce fecha: ");
+		int año = Integer.parseInt(consola.pedirDato("	-Año: "));
+		int mes = Integer.parseInt(consola.pedirDato("	-Mes (numérico): "));
+		int dia = Integer.parseInt(consola.pedirDato("	-Día: "));
 		Calendar fecha = Calendar.getInstance();
 		fecha.set(año, mes, dia);
-		System.out.print("Introduce tarifa: ");
-		Tarifa tarifa = new Tarifa(scan.nextDouble());
+		gestion.emitirFactura(nif, fecha);
+	}
+
+	private void listarLlamadas() {
+		String nif = consola.pedirDato("Introduce NIF: ");
+		gestion.listarLlamadasCliente(nif);
+	}
+
+	private void darAltaLlamada() {
+		String nif = consola.pedirDato("Introduce NIF: ");
+		
+		int num = Integer.parseInt(consola.pedirDato("Introduce el número de teléfono: "));
+		
+		consola.mostrarDato("Introduce fecha: ");
+		int año = Integer.parseInt(consola.pedirDato("	-Año: "));
+		int mes = Integer.parseInt(consola.pedirDato("	-Mes (numérico): "));
+		int dia = Integer.parseInt(consola.pedirDato("	-Día: "));
+		int hor = Integer.parseInt(consola.pedirDato("Introduce hora: "));
+		int min = Integer.parseInt(consola.pedirDato("Introduce minuto: "));
+		Calendar fecha = Calendar.getInstance();
+		fecha.set(año, mes, dia, hor, min);
+		
+		int dur = Integer.parseInt(consola.pedirDato("Introduce duración: "));
+		
+		Llamada llamada = new Llamada(num, fecha, dur);
+		gestion.darDeAltaLlamada(nif, llamada);
+	}
+
+	private void recuperarCliente() throws ExcepcionClienteNoEncontrado {
+		String nif = consola.pedirDato("Introduce NIF: ");
+		gestion.recuperarDatosNIF(nif);
+	}
+
+	private void cambiarTarifa() throws ExcepcionClienteNoEncontrado {
+		String nif = consola.pedirDato("Introduce NIF: ");
+		Tarifa tarifa = new Tarifa(Double.parseDouble(consola.pedirDato("Introduce tarifa: ")));
+		gestion.cambiarTarifa(nif, tarifa);
+	}
+
+	private void borrarCliente() throws ExcepcionClienteNoEncontrado {
+		String nif = consola.pedirDato("Introduce NIF: ");
+		gestion.borrarCliente(nif);
+	}
+	
+	private void darAltaCliente() throws ExcepcionClienteYaRegistrado {
+		consola.mostrarDato("Introducir datos cliente: ");
+		
+		String nombre = consola.pedirDato("Introduce nombre: ");
+		String nif = consola.pedirDato("Introduce NIF: ");
+		
+		consola.mostrarDato("Introduce dirección: ");
+		int codP = Integer.parseInt(consola.pedirDato("	-Código Postal: "));
+		String prov = consola.pedirDato("	-Provincia: "); 
+		String pob = consola.pedirDato("	-Población: ");
+		Direccion dir = new Direccion(codP,prov,pob);
+		
+		String correo = consola.pedirDato("Introduce correo: ");
+		consola.mostrarDato("Introduce fecha de alta: ");
+		
+		int año = Integer.parseInt(consola.pedirDato("	-Año: "));
+		int mes = Integer.parseInt(consola.pedirDato("	-Mes (numérico): "));		
+		int dia = Integer.parseInt(consola.pedirDato("	-Día: "));
+		Calendar fecha = Calendar.getInstance();
+		fecha.set(año, mes, dia);
+		
+		Tarifa tarifa = new Tarifa(Double.parseDouble(consola.pedirDato("Introduce tarifa: ")));
 		Cliente cliente = new Cliente(nombre,nif,dir,correo,fecha,tarifa);
 		gestion.darDeAltaCliente(cliente);
 	}
