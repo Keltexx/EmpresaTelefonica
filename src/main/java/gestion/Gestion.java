@@ -157,16 +157,16 @@ public class Gestion implements Serializable {
 		FileOutputStream fos = null;
 		ObjectOutputStream oos = null;
 		try {
-			fos = new FileOutputStream("clientes.bin");
+			fos = new FileOutputStream("io/clientes.bin");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(clientes);
-			fos = new FileOutputStream("facturas.bin");
+			fos = new FileOutputStream("io/facturas.bin");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(facturas);
-			fos = new FileOutputStream("facturasCodigo.bin");
+			fos = new FileOutputStream("io/facturasCodigo.bin");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(facturasCodigo);
-			fos = new FileOutputStream("llamadas.bin");
+			fos = new FileOutputStream("io/llamadas.bin");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(llamadas);
 		} catch (FileNotFoundException e) {
@@ -183,16 +183,16 @@ public class Gestion implements Serializable {
 		FileInputStream fis = null;
 		ObjectInputStream ois = null;
 		try {
-			fis = new FileInputStream("clientes.bin");
+			fis = new FileInputStream("io/clientes.bin");
 			ois = new ObjectInputStream(fis);
 			clientes = (HashMap<String, Cliente>) ois.readObject();
-			fis = new FileInputStream("facturas.bin");
+			fis = new FileInputStream("io/facturas.bin");
 			ois = new ObjectInputStream(fis);
 			facturas = (HashMap<String, List<Factura>>) ois.readObject();
-			fis = new FileInputStream("facturasCodigo.bin");
+			fis = new FileInputStream("io/facturasCodigo.bin");
 			ois = new ObjectInputStream(fis);
 			facturasCodigo= (HashMap<Integer, Factura>) ois.readObject();
-			fis = new FileInputStream("llamadas.bin");
+			fis = new FileInputStream("io/llamadas.bin");
 			ois = new ObjectInputStream(fis);
 			llamadas = (HashMap<String, List<Llamada>>) ois.readObject();
 		} catch (FileNotFoundException e) {

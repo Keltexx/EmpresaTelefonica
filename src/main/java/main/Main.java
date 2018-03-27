@@ -12,8 +12,8 @@ import factura.Tarifa;
 import gestion.Gestion;
 
 public class Main {
-	Consola consola = new Consola();
-	Gestion gestion = new Gestion();
+	private Consola consola = new Consola();
+	private Gestion gestion = new Gestion();
 	
 	private void start() throws IOException, ExcepcionClienteNoEncontrado, ExcepcionClienteYaRegistrado {
 		gestion.cargarDatos();
