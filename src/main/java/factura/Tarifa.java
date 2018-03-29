@@ -14,4 +14,10 @@ public class Tarifa{
 	public double getImporte() {
 		return this.importe;
 	}
+	
+	public String toString() {
+		return "Tarifa [ \n" +
+				"\t importe = "+ importe + "]";
+	}	
+	
 }

@@ -50,5 +50,16 @@ public class Factura implements Fecha{
 	public double getImporte() {
 		return this.importe;
 	}
+
+	@Override
+	public String toString() {
+		return "Factura [ \n" +
+				"\t tarifa = " + tarifa + "\n" +
+				"\t codigo = " + codigo + "\n" +
+				"\t fecha de emision = " + fechaEmision.get(Calendar.DAY_OF_MONTH) + "/" + fechaEmision.get(Calendar.MONTH) + "/" + fechaEmision.get(Calendar.YEAR) + 
+				"\t importe = " + importe + "]";
+	}
+	
+	
 	
 }

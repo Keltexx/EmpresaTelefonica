@@ -2,11 +2,15 @@ package main;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+
 import cliente.Cliente;
 import cliente.Direccion;
 import consola.Consola;
 import excepciones.ExcepcionClienteNoEncontrado;
 import excepciones.ExcepcionClienteYaRegistrado;
+import factura.Factura;
 import factura.Llamada;
 import factura.Tarifa;
 import gestion.Gestion;
@@ -26,44 +30,61 @@ public class Main {
 	}
 
 		
-	private void mostrarMenu() throws ExcepcionClienteNoEncontrado, ExcepcionClienteYaRegistrado {	
-		consola.mostrarDato(Menu.getMenu());
-		byte opcion = Byte.parseByte(consola.pedirDato("Elige una opción:"));
-		Menu menu = Menu.getOpcion(opcion);
-		switch (menu) {
-		case ALTA_CLIENTE:
-			darAltaCliente();
-			break;
-		case BORRAR_CLIENTE:
-			borrarCliente();
-			break;
-		case CAMBIAR_TARIFA:
-			cambiarTarifa();
-			break;
-		case RECUPERAR_CLIENTE_NIF:
-			recuperarCliente();
-			break;
-		case RECUPERAR_TODOS:
-			gestion.recuperarListadoClientes();
-			break;
-		case DAR_ALTA_LLAMADA:
-			darAltaLlamada();
-			break;
-		case LISTAR_LLAMADAS:
-			listarLlamadas();
-			break;
-		case EMITIR_FACTURA:
-			emitirFactura();
-			break;
-		case RECUPERAR_DATOS_FACTURA:
-			recuperarDatosFactura();
-			break;
-		case RECUPERAR_FACTURAS:
-			recuperarFacturas();
-		default:
-			break;
+	private void mostrarMenu() {	
+		while(true) {
+			consola.mostrarDato(Menu.getMenu());
+			byte opcion = Byte.parseByte(consola.pedirDato("Elige una opción:"));
+			Menu menu = Menu.getOpcion(opcion);
+			switch (menu) {
+			case SALIR:
+				break;
+			case ALTA_CLIENTE:
+				darAltaCliente();
+				break;
+			case BORRAR_CLIENTE:
+				borrarCliente();
+				break;
+			case CAMBIAR_TARIFA:
+				cambiarTarifa();
+				break;
+			case RECUPERAR_CLIENTE_NIF:
+				recuperarCliente();
+				break;
+			case RECUPERAR_TODOS:
+				recuperarListadoClientes();
+				break;
+			case DAR_ALTA_LLAMADA:
+				darAltaLlamada();
+				break;
+			case LISTAR_LLAMADAS:
+				listarLlamadas();
+				break;
+			case EMITIR_FACTURA:
+				emitirFactura();
+				break;
+			case RECUPERAR_DATOS_FACTURA:
+				recuperarDatosFactura();
+				break;
+			case RECUPERAR_FACTURAS:
+				recuperarFacturas();
+			case MOSTRAR_LISTADO_CLIENTES_FECHAS:
+				break;
+			case MOSTRAR_LISTADO_FACTURAS_FECHAS:
+				break;
+			case MOSTRAR_LISTADO_LLAMADAS_FECHAS:
+				break;
+			
+			
+			}
+			consola.mostrarDato("\n Operacion realizada\n");
 		}
-		consola.mostrarDato("Ok");
+	}
+
+	private void recuperarListadoClientes() {
+		HashMap<String, Cliente> clientes = gestion.recuperarListadoClientes();
+		for(Cliente cliente : clientes.values()) {
+			consola.mostrarDato(cliente.getNIF());
+		}
 	}
 
 	private void recuperarFacturas() {
@@ -73,7 +94,11 @@ public class Main {
 
 	private void recuperarDatosFactura() {
 		int cod = Integer.parseInt(consola.pedirDato("Introduce código de factura: "));
-		gestion.recuperarDatosFacturaCodigo(cod);
+		Factura factura = gestion.recuperarDatosFacturaCodigo(cod);
+		if(factura != null)
+			consola.mostrarDato(factura.toString());
+		else
+			consola.mostrarDato("Factura no encontrada");
 	}
 
 	private void emitirFactura() {
@@ -85,11 +110,17 @@ public class Main {
 		Calendar fecha = Calendar.getInstance();
 		fecha.set(año, mes, dia);
 		gestion.emitirFactura(nif, fecha);
+		consola.mostrarDato("Factura realizada");
 	}
 
 	private void listarLlamadas() {
 		String nif = consola.pedirDato("Introduce NIF: ");
-		gestion.listarLlamadasCliente(nif);
+		List<Llamada> llamadas = gestion.listarLlamadasCliente(nif);
+		if(llamadas != null) {
+			for(Llamada llamada : llamadas)
+				llamada.toString();
+		}else
+			consola.mostrarDato("No hay llamadas");
 	}
 
 	private void darAltaLlamada() {
@@ -108,27 +139,45 @@ public class Main {
 		
 		int dur = Integer.parseInt(consola.pedirDato("Introduce duración: "));
 		
-		Llamada llamada = new Llamada(num, fecha, dur);
+		Llamada llamada = new Llamada(num, fecha, dur);	
 		gestion.darDeAltaLlamada(nif, llamada);
+		consola.mostrarDato("Llamada registrada con exito");
+	
 	}
 
-	private void recuperarCliente() throws ExcepcionClienteNoEncontrado {
+	private void recuperarCliente() {
 		String nif = consola.pedirDato("Introduce NIF: ");
-		gestion.recuperarDatosNIF(nif);
+		try {
+			Cliente cliente = gestion.recuperarDatosNIF(nif);
+			consola.mostrarDato(cliente.toString());
+		}catch(ExcepcionClienteNoEncontrado e) {
+			e.getMessage();
+		}
 	}
 
-	private void cambiarTarifa() throws ExcepcionClienteNoEncontrado {
+	private void cambiarTarifa() {
 		String nif = consola.pedirDato("Introduce NIF: ");
 		Tarifa tarifa = new Tarifa(Double.parseDouble(consola.pedirDato("Introduce tarifa: ")));
-		gestion.cambiarTarifa(nif, tarifa);
+		try {
+			gestion.cambiarTarifa(nif, tarifa);
+			consola.mostrarDato("Tarifa cambiada con exito");
+		}catch(ExcepcionClienteNoEncontrado e) {
+			e.getMessage();
+		}
 	}
 
-	private void borrarCliente() throws ExcepcionClienteNoEncontrado {
+	private void borrarCliente() {
 		String nif = consola.pedirDato("Introduce NIF: ");
-		gestion.borrarCliente(nif);
+		try {
+			gestion.borrarCliente(nif);
+			consola.mostrarDato("Cliente borrado con exito");
+		}catch(ExcepcionClienteNoEncontrado e) {
+			e.getMessage();
+		}
+		
 	}
 	
-	private void darAltaCliente() throws ExcepcionClienteYaRegistrado {
+	private void darAltaCliente() {
 		consola.mostrarDato("Introducir datos cliente: ");
 		
 		String nombre = consola.pedirDato("Introduce nombre: ");
@@ -151,7 +200,14 @@ public class Main {
 		
 		Tarifa tarifa = new Tarifa(Double.parseDouble(consola.pedirDato("Introduce tarifa: ")));
 		Cliente cliente = new Cliente(nombre,nif,dir,correo,fecha,tarifa);
-		gestion.darDeAltaCliente(cliente);
+		
+		try {
+			gestion.darDeAltaCliente(cliente);
+			consola.mostrarDato("Cliente dado de alta");
+		}catch(ExcepcionClienteYaRegistrado e) {
+			e.getMessage();
+		}
+		
 	}
 	
 }

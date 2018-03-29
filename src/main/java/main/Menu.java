@@ -3,6 +3,7 @@ package main;
 
 
 public enum Menu {
+	SALIR("Salir"),
 	ALTA_CLIENTE("Dar de alta un nuevo cliente"),
 	BORRAR_CLIENTE("Borrar un cliente"),
 	CAMBIAR_TARIFA("Cambiar la tarifa de un cliente"),
@@ -10,7 +11,7 @@ public enum Menu {
 	RECUPERAR_TODOS("Recuperar el listado de todos los clientes"),
 	DAR_ALTA_LLAMADA("Dar de alta una llamada"),
 	LISTAR_LLAMADAS("Listar todas las llamadas de un cliente"),
-	EMITIR_FACTURA("Calcular factura"),
+	EMITIR_FACTURA("Emitir factura"),
 	RECUPERAR_DATOS_FACTURA("Recuperar los datos de una factura"),
 	RECUPERAR_FACTURAS("Recuperar todas las facturas"),
 	MOSTRAR_LISTADO_CLIENTES_FECHAS("Mostrar un listado de clientes que fueron dados de alta entre dos fechas"),

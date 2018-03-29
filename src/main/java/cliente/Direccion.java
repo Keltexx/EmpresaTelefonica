@@ -35,4 +35,11 @@ public class Direccion {
 		this.poblacion = poblacion;
 	}
 	
+	public String toString() {
+		return "Direccion [ \n" +
+				"\t codido postal = " + codPostal + "\n"+
+				"\t provincia = " + provincia + "\n"+
+				"\t poblacion = " + poblacion + "]";
+	}
+	
 }

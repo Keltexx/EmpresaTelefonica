@@ -1,12 +1,17 @@
 package cliente;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 
 import factura.Tarifa;
 import interfaces.Fecha;
 
-public class Cliente implements Fecha {
+public class Cliente implements Fecha, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4886706257783637148L;
 	private String nombre;
 	private String NIF;
 	private Direccion direccion;
@@ -52,7 +57,16 @@ public class Cliente implements Fecha {
 		this.tarifa = tarifa;
 	}
 	
-
+	public String toString() {
+		return "Cliente { \n" +
+				"\t nombre = " + nombre + "\n" +
+				"\t nif = " + NIF + "\n" +
+				"\t" + direccion + "\n" +
+				"\t correo = " + correo + "\n" +
+				"\t fecha de alta = " + fechaDeAlta.get(Calendar.DAY_OF_MONTH) + "/" + fechaDeAlta.get(Calendar.MONTH) + "/" + fechaDeAlta.get(Calendar.YEAR) + "\n" +
+				"\t" + tarifa + "\n" +
+				"}";
+	}
 	
 	
 }
