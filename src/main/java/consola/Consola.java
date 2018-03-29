@@ -8,7 +8,7 @@ public class Consola {
 	
 	
 	public void mostrarDato(Object dato){
-		System.out.println(dato);
+		System.out.print(dato);
 	}
 	
 	public String pedirDato(String dato){
