@@ -4,6 +4,10 @@ import java.util.Calendar;
 import factura.Tarifa;
 
 public class Particular extends Cliente{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4781412848002462045L;
 	private String apellidos;
 	
 	public Particular() {

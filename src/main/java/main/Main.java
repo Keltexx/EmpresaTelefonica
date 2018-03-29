@@ -1,6 +1,5 @@
 package main;
 
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -14,71 +13,137 @@ import factura.Factura;
 import factura.Llamada;
 import factura.Tarifa;
 import gestion.Gestion;
+import menu.*;
 
 public class Main {
 	private Consola consola = new Consola();
 	private Gestion gestion = new Gestion();
 	
-	private void start() throws IOException, ExcepcionClienteNoEncontrado, ExcepcionClienteYaRegistrado {
+	private void start() {
 		gestion.cargarDatos();
 		mostrarMenu();
 		gestion.guardarDatos();
 	}
 	
-	public static void main(String[] args) throws IOException, ExcepcionClienteNoEncontrado, ExcepcionClienteYaRegistrado  {
+	public static void main(String[] args) {
 		new Main().start();
 	}
 
 		
-	private void mostrarMenu() {	
-		while(true) {
-			consola.mostrarDato(Menu.getMenu());
-			byte opcion = Byte.parseByte(consola.pedirDato("Elige una opción:"));
-			Menu menu = Menu.getOpcion(opcion);
-			switch (menu) {
-			case SALIR:
-				break;
-			case ALTA_CLIENTE:
-				darAltaCliente();
-				break;
-			case BORRAR_CLIENTE:
-				borrarCliente();
-				break;
-			case CAMBIAR_TARIFA:
-				cambiarTarifa();
-				break;
-			case RECUPERAR_CLIENTE_NIF:
-				recuperarCliente();
-				break;
-			case RECUPERAR_TODOS:
-				recuperarListadoClientes();
-				break;
-			case DAR_ALTA_LLAMADA:
-				darAltaLlamada();
-				break;
-			case LISTAR_LLAMADAS:
-				listarLlamadas();
-				break;
-			case EMITIR_FACTURA:
-				emitirFactura();
-				break;
-			case RECUPERAR_DATOS_FACTURA:
-				recuperarDatosFactura();
-				break;
-			case RECUPERAR_FACTURAS:
-				recuperarFacturas();
-			case MOSTRAR_LISTADO_CLIENTES_FECHAS:
-				break;
-			case MOSTRAR_LISTADO_FACTURAS_FECHAS:
-				break;
-			case MOSTRAR_LISTADO_LLAMADAS_FECHAS:
-				break;
-			
-			
-			}
-			consola.mostrarDato("\n Operacion realizada\n");
+	private void mostrarMenu() {
+		consola.mostrarDato(MenuPrincipal.getMenu());
+		byte opcion = Byte.parseByte(consola.pedirDato("Elige una opción:"));
+		MenuPrincipal menu = MenuPrincipal.getOpcion(opcion);
+	
+		switch (menu) {
+		case SALIR:
+			break;
+		case MENU_CLIENTES:
+			mostrarMenuClientes();
+			break;
+		case MENU_FACTURAS:
+			mostrarMenuFacturas();
+			break;
+		case MENU_LLAMADAS:
+			mostrarMenuLlamadas();
+			break;
+		default:
+			break;
+
 		}
 	}
+	
+	
+	
+	private void mostrarMenuClientes() {	
+		consola.mostrarDato(MenuClientes.getMenu());
+		byte opcion = Byte.parseByte(consola.pedirDato("Elige una opción:"));
+		MenuClientes menu = MenuClientes.getOpcion(opcion);
+		switch (menu) {
+		case VOLVER:
+			mostrarMenu();
+			break;
+		case ALTA_CLIENTE:
+			darAltaCliente();
+			mostrarMenuClientes();
+			break;
+		case BORRAR_CLIENTE:
+			borrarCliente();
+			mostrarMenuClientes();
+			break;
+		case CAMBIAR_TARIFA:
+			cambiarTarifa();
+			mostrarMenuClientes();
+			break;
+		case MOSTRAR_LISTADO_CLIENTES_FECHAS:
+			mostrarMenuClientes();
+			break;
+		case RECUPERAR_CLIENTE_NIF:
+			recuperarCliente();
+			mostrarMenuClientes();
+			break;
+		case RECUPERAR_TODOS:
+			recuperarListadoClientes();
+			mostrarMenuClientes();
+			break;
+		default:
+			break;
+		}
+	}
+	
+	
+	
+	
+	private void mostrarMenuLlamadas() {	
+		consola.mostrarDato(MenuLlamadas.getMenu());
+		byte opcion = Byte.parseByte(consola.pedirDato("Elige una opción:"));
+		MenuLlamadas menu = MenuLlamadas.getOpcion(opcion);
+		switch (menu) {
+		case DAR_ALTA_LLAMADA:
+			darAltaLlamada();
+			break;
+		case LISTAR_LLAMADAS:
+			listarLlamadas();
+			break;
+		case MOSTRAR_LISTADO_LLAMADAS_FECHAS:
+			break;
+		case VOLVER:
+			mostrarMenu();
+			break;
+		default:
+			break;
+		}
+	}
+
+
+	
+	private void mostrarMenuFacturas() {	
+		consola.mostrarDato(MenuFacturas.getMenu());
+		byte opcion = Byte.parseByte(consola.pedirDato("Elige una opción:"));
+		MenuFacturas menu = MenuFacturas.getOpcion(opcion);
+		switch (menu) {
+		case EMITIR_FACTURA:
+			emitirFactura();
+			break;
+		case MOSTRAR_LISTADO_FACTURAS_FECHAS:
+			break;
+		case RECUPERAR_DATOS_FACTURA:
+			recuperarDatosFactura();
+			break;
+		case RECUPERAR_FACTURAS:
+			recuperarFacturas();
+			break;
+		case VOLVER:
+			mostrarMenu();
+			break;
+		default:
+			break;
+		}
+	}
+
+	
+	
+	
 
 	private void recuperarListadoClientes() {
 		HashMap<String, Cliente> clientes = gestion.recuperarListadoClientes();

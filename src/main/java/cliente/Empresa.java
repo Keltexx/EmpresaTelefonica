@@ -6,6 +6,11 @@ import factura.Tarifa;
 
 public class Empresa extends Cliente {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6917603621901901744L;
+
 	public Empresa() {
 		super();
 	}

@@ -1,7 +1,8 @@
 package interfaces;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public interface Fecha {
+public interface Fecha extends Serializable{
 	Calendar getFecha();
 }

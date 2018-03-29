@@ -1,6 +1,12 @@
 package factura;
 
-public class Tarifa{
+import java.io.Serializable;
+
+public class Tarifa implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3948344019451414987L;
 	private double importe;
 	
 	public Tarifa(double importe){

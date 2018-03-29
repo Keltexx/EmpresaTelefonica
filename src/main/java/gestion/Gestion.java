@@ -153,7 +153,7 @@ public class Gestion implements Serializable {
 
 	// I/O
 
-	public void guardarDatos() throws IOException {
+	public void guardarDatos() {
 		FileOutputStream fos = null;
 		ObjectOutputStream oos = null;
 		try {
@@ -173,13 +173,10 @@ public class Gestion implements Serializable {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} finally {
-			fos.close();
-			oos.close();
 		}
 	}
 
-	public void cargarDatos() throws IOException {
+	public void cargarDatos() {
 		FileInputStream fis = null;
 		ObjectInputStream ois = null;
 		try {
@@ -201,10 +198,6 @@ public class Gestion implements Serializable {
 			e.printStackTrace();
 		}catch(ClassNotFoundException e) {
 			e.printStackTrace();
-		}
-		finally {
-			fis.close();
-			ois.close();
 		}
 	}
 
