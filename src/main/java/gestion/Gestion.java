@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -20,11 +19,8 @@ import factura.Tarifa;
 import fecha.FechaGenerico;
 import excepciones.*;
 
-public class Gestion implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2108257942382069823L;
+public class Gestion {
+	
 	private HashMap<String, Cliente> clientes;
 	private HashMap<String, List<Factura>> facturas;
 	private HashMap<Integer, Factura> facturasCodigo;

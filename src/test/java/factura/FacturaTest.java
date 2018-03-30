@@ -8,7 +8,10 @@ import org.junit.Before;
 
 
 import es.uji.www.GeneradorDatosINE;
+import excepciones.ExcepcionClienteNoEncontrado;
 import excepciones.ExcepcionClienteYaRegistrado;
+import excepciones.ExcepcionFacturaNoEncontrada;
+import excepciones.ExcepcionListaFacturasVacia;
 import gestion.Gestion;
 
 import java.util.Calendar;
@@ -27,7 +30,7 @@ public class FacturaTest {
 	private Factura factura;
 
 	@Before
-	public void init() throws ExcepcionClienteYaRegistrado {
+	public void init() throws ExcepcionClienteYaRegistrado, ExcepcionClienteNoEncontrado {
 		gestion=new Gestion();
 		generador = new GeneradorDatosINE();
 		cliente= new Cliente(generador.getNombre(), generador.getNIF(),
@@ -60,7 +63,7 @@ public class FacturaTest {
 	}
 
 	@Test
-	public void testEmitirFactura() {
+	public void testEmitirFactura() throws ExcepcionClienteNoEncontrado {
 		Calendar fechaFacturacion = Calendar.getInstance();
 		fechaFacturacion.set(Calendar.MONTH, fechaFacturacion.get(Calendar.MONTH)-1);
 		Factura aux = gestion.emitirFactura(cliente.getNIF(), fechaFacturacion);
@@ -71,7 +74,7 @@ public class FacturaTest {
 	}
 	
 	@Test
-	public void testRecuperarDatosFacturaCodigo() {
+	public void testRecuperarDatosFacturaCodigo() throws ExcepcionFacturaNoEncontrada, ExcepcionClienteNoEncontrado {
 		assertNull(gestion.recuperarDatosFacturaCodigo(0));
 		
 		Calendar fechaFacturacion = Calendar.getInstance();
@@ -82,7 +85,7 @@ public class FacturaTest {
 	}
 	
 	@Test
-	public void testRecuperarFacturas() {
+	public void testRecuperarFacturas() throws ExcepcionClienteNoEncontrado, ExcepcionListaFacturasVacia {
 		assertNull(gestion.recuperarFacturas(cliente.getNIF()));
 		
 		Calendar fechaFacturacion = Calendar.getInstance();

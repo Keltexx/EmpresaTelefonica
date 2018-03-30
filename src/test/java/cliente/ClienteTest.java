@@ -9,6 +9,7 @@ import org.junit.Test;
 import es.uji.www.GeneradorDatosINE;
 import excepciones.ExcepcionClienteNoEncontrado;
 import excepciones.ExcepcionClienteYaRegistrado;
+import excepciones.ExcepcionListaClientesVacia;
 import factura.*;
 import gestion.Gestion;
 
@@ -102,7 +103,7 @@ public class ClienteTest {
 	}
 	
 	@Test
-	public void testRecuperarListadoClientes() throws ExcepcionClienteYaRegistrado {
+	public void testRecuperarListadoClientes() throws ExcepcionClienteYaRegistrado, ExcepcionListaClientesVacia {
 		gestion.darDeAltaCliente(empresa);
 		gestion.darDeAltaCliente(particular);
 		gestion.darDeAltaCliente(hombre);

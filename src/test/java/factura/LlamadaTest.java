@@ -8,6 +8,7 @@ import org.junit.Before;
 
 
 import es.uji.www.GeneradorDatosINE;
+import excepciones.ExcepcionClienteNoEncontrado;
 import excepciones.ExcepcionClienteYaRegistrado;
 import gestion.Gestion;
 
@@ -50,7 +51,7 @@ public class LlamadaTest {
 	}
 	
 	@Test
-	public void testDarDeAltaLlamada() {
+	public void testDarDeAltaLlamada() throws ExcepcionClienteNoEncontrado {
 		assertTrue(gestion.darDeAltaLlamada(cliente.getNIF(), llamada1));
 		assertTrue(gestion.darDeAltaLlamada(cliente.getNIF(), llamada2));
 		assertTrue(gestion.darDeAltaLlamada(cliente.getNIF(), llamada3));
@@ -58,7 +59,7 @@ public class LlamadaTest {
 	}
 	
 	@Test
-	public void testListarLlamadasCliente() {
+	public void testListarLlamadasCliente() throws ExcepcionClienteNoEncontrado {
 		gestion.darDeAltaLlamada(cliente.getNIF(), llamada1);
 		gestion.darDeAltaLlamada(cliente.getNIF(), llamada2);
 		gestion.darDeAltaLlamada(cliente.getNIF(), llamada3);
