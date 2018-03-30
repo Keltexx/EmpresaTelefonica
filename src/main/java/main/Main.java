@@ -11,6 +11,9 @@ import cliente.Particular;
 import consola.Consola;
 import excepciones.ExcepcionClienteNoEncontrado;
 import excepciones.ExcepcionClienteYaRegistrado;
+import excepciones.ExcepcionFacturaNoEncontrada;
+import excepciones.ExcepcionListaClientesVacia;
+import excepciones.ExcepcionListaFacturasVacia;
 import factura.Factura;
 import factura.Llamada;
 import factura.Tarifa;
@@ -150,7 +153,12 @@ public class Main {
 	
 
 	private void recuperarListadoClientes() {
-		HashMap<String, Cliente> clientes = gestion.recuperarListadoClientes();
+		HashMap<String, Cliente> clientes = null;
+		try {
+			clientes = gestion.recuperarListadoClientes();
+		} catch (ExcepcionListaClientesVacia e) {
+			consola.mostrarDato("\n"+ e.getMessage() + "\n\n");
+		}
 		for(Cliente cliente : clientes.values()) {
 			consola.mostrarDato(cliente.getNIF());
 			consola.mostrarDato("\n\n");
@@ -159,12 +167,21 @@ public class Main {
 
 	private void recuperarFacturas() {
 		String nif = consola.pedirDato("Introduce NIF: ");
-		gestion.recuperarFacturas(nif);
+		try {
+			gestion.recuperarFacturas(nif);
+		} catch (ExcepcionClienteNoEncontrado | ExcepcionListaFacturasVacia e) {
+			consola.mostrarDato("\n"+ e.getMessage() + "\n\n");
+		}
 	}
 
 	private void recuperarDatosFactura() {
 		int cod = Integer.parseInt(consola.pedirDato("Introduce código de factura: "));
-		Factura factura = gestion.recuperarDatosFacturaCodigo(cod);
+		Factura factura = null;
+		try {
+			factura = gestion.recuperarDatosFacturaCodigo(cod);
+		} catch (ExcepcionFacturaNoEncontrada e) {
+			consola.mostrarDato("\n"+ e.getMessage() + "\n\n");
+		}
 		if(factura != null) {
 			consola.mostrarDato(factura.toString());
 			consola.mostrarDato("\n\n");
@@ -181,13 +198,22 @@ public class Main {
 		int dia = Integer.parseInt(consola.pedirDato("	-Día: "));
 		Calendar fecha = Calendar.getInstance();
 		fecha.set(año, mes, dia);
-		gestion.emitirFactura(nif, fecha);
+		try {
+			gestion.emitirFactura(nif, fecha);
+		} catch (ExcepcionClienteNoEncontrado e) {
+			consola.mostrarDato("\n"+ e.getMessage() + "\n\n");
+		}
 		consola.mostrarDato("\nFactura realizada \n\n");
 	}
 
 	private void listarLlamadas() {
 		String nif = consola.pedirDato("Introduce NIF: ");
-		List<Llamada> llamadas = gestion.listarLlamadasCliente(nif);
+		List<Llamada> llamadas = null;
+		try {
+			llamadas = gestion.listarLlamadasCliente(nif);
+		} catch (ExcepcionClienteNoEncontrado e) {
+			consola.mostrarDato("\n"+ e.getMessage() + "\n\n");
+		}
 		if(llamadas != null) {
 			for(Llamada llamada : llamadas) {
 				llamada.toString();
@@ -214,7 +240,11 @@ public class Main {
 		int dur = Integer.parseInt(consola.pedirDato("Introduce duración: "));
 		
 		Llamada llamada = new Llamada(num, fecha, dur);	
-		gestion.darDeAltaLlamada(nif, llamada);
+		try {
+			gestion.darDeAltaLlamada(nif, llamada);
+		} catch (ExcepcionClienteNoEncontrado e) {
+			consola.mostrarDato("\n"+ e.getMessage() + "\n\n");
+		}
 		consola.mostrarDato("\nLlamada registrada con exito \n\n");
 	
 	}
@@ -226,7 +256,7 @@ public class Main {
 			consola.mostrarDato(cliente.toString());
 			consola.mostrarDato("\n\n");
 		}catch(ExcepcionClienteNoEncontrado e) {
-			e.getMessage();
+			consola.mostrarDato("\n"+ e.getMessage() + "\n\n");
 		}
 	}
 
@@ -237,7 +267,7 @@ public class Main {
 			gestion.cambiarTarifa(nif, tarifa);
 			consola.mostrarDato("\nTarifa cambiada con exito \n\n");
 		}catch(ExcepcionClienteNoEncontrado e) {
-			e.getMessage();
+			consola.mostrarDato("\n"+ e.getMessage() + "\n\n");
 		}
 	}
 
@@ -247,7 +277,7 @@ public class Main {
 			gestion.borrarCliente(nif);
 			consola.mostrarDato("\nCliente borrado con exito \n\n");
 		}catch(ExcepcionClienteNoEncontrado e) {
-			e.getMessage();
+			consola.mostrarDato("\n"+ e.getMessage() + "\n\n");
 		}
 		
 	}
@@ -291,7 +321,7 @@ public class Main {
 			gestion.darDeAltaCliente(cliente);
 			consola.mostrarDato("\nCliente dado de alta \n\n");
 		}catch(ExcepcionClienteYaRegistrado e) {
-			e.getMessage();
+			consola.mostrarDato("\n"+ e.getMessage() + "\n\n");
 		}
 		
 	}

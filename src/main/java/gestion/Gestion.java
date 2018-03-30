@@ -71,41 +71,66 @@ public class Gestion implements Serializable {
 		throw new ExcepcionClienteNoEncontrado();
 	}
 
-	public HashMap<String, Cliente> recuperarListadoClientes() {
+	public HashMap<String, Cliente> recuperarListadoClientes() throws ExcepcionListaClientesVacia{
+		if(this.clientes.isEmpty())
+			throw new ExcepcionListaClientesVacia();
+		
 		return this.clientes;
 	}
 
-	public Collection<Cliente> mostrarListadoClientesFechas(Calendar fechaInicio, Calendar fechaFin) {
+	public Collection<Cliente> mostrarListadoClientesFechas(Calendar fechaInicio, Calendar fechaFin) throws ExcepcionFechas, ExcepcionListaClientesVacia{
+		if(fechaInicio.after(fechaFin))
+			throw new ExcepcionFechas();
+		
 		Collection<Cliente> clientes = this.clientes.values();
 		clientes = FechaGenerico.getConjuntoPorFecha(clientes, fechaInicio, fechaFin);
+		
+		if(clientes.isEmpty())
+			throw new ExcepcionListaClientesVacia();
+		
 		return clientes;
 	}
 
 	// OPERACIONES DE LAS LLAMADAS
 
-	public boolean darDeAltaLlamada(String nif, Llamada llamada) {
+	public boolean darDeAltaLlamada(String nif, Llamada llamada) throws ExcepcionClienteNoEncontrado {
+		if(!this.clientes.containsKey(nif))
+			throw new ExcepcionClienteNoEncontrado();		
+		
 		if (!this.llamadas.containsKey(nif))
 			this.llamadas.put(nif, new ArrayList<Llamada>());
 		this.llamadas.get(nif).add(llamada);
 		return true;
 	}
 
-	public List<Llamada> listarLlamadasCliente(String nif) {
+	public List<Llamada> listarLlamadasCliente(String nif) throws ExcepcionClienteNoEncontrado {
 		if (this.llamadas.containsKey(nif)) {
 			return this.llamadas.get(nif);
 		}
-		return null;
+		throw new ExcepcionClienteNoEncontrado();
 	}
 
-	public Collection<Llamada> mostrarListadoLlamadasFechas(String nif, Calendar fechaInicio, Calendar fechaFin) {
+	public Collection<Llamada> mostrarListadoLlamadasFechas(String nif, Calendar fechaInicio, Calendar fechaFin) throws ExcepcionListaLlamadasVacia, ExcepcionFechas, ExcepcionClienteNoEncontrado{
+		if(fechaInicio.after(fechaFin))
+			throw new ExcepcionFechas();
+		
+		if(!this.llamadas.containsKey(nif))
+			throw new ExcepcionClienteNoEncontrado();
+		
 		Collection<Llamada> llamadas = this.llamadas.get(nif);
 		llamadas = FechaGenerico.getConjuntoPorFecha(llamadas, fechaInicio, fechaFin);
+		if(llamadas.isEmpty())
+			throw new ExcepcionListaLlamadasVacia();
+		
 		return llamadas;
 	}
 
 	// OPERACIONES DE LAS FACTURAS
 
-	public Factura emitirFactura(String nif, Calendar fechaFacturacion) {
+	public Factura emitirFactura(String nif, Calendar fechaFacturacion) throws ExcepcionClienteNoEncontrado{
+		if(!this.clientes.containsKey(nif))
+			throw new ExcepcionClienteNoEncontrado();
+		
 		int codigo = this.facturasCodigo.size();
 		Tarifa tarifa = this.clientes.get(nif).getTarifa();
 		Calendar fechaEmision = Calendar.getInstance();
@@ -131,23 +156,37 @@ public class Gestion implements Serializable {
 
 	}
 
-	public Factura recuperarDatosFacturaCodigo(Integer codigo) {
+	public Factura recuperarDatosFacturaCodigo(Integer codigo) throws ExcepcionFacturaNoEncontrada {
 		if (this.facturasCodigo.containsKey(codigo))
 			return this.facturasCodigo.get(codigo);
 
-		return null;
+		throw new ExcepcionFacturaNoEncontrada();
 	}
 
-	public List<Factura> recuperarFacturas(String nif) {
-		if (this.facturas.containsKey(nif))
-			return this.facturas.get(nif);
-
-		return null;
+	public List<Factura> recuperarFacturas(String nif) throws ExcepcionClienteNoEncontrado, ExcepcionListaFacturasVacia {
+		if (!this.facturas.containsKey(nif))
+			throw new ExcepcionClienteNoEncontrado();
+		
+		List<Factura> listaFacturas = this.facturas.get(nif);
+		if(listaFacturas.isEmpty())
+			throw new ExcepcionListaFacturasVacia();
+		
+		return listaFacturas;
 	}
 
-	public Collection<Factura> mostrarListadoFacturasFechas(String nif, Calendar fechaInicio, Calendar fechaFin) {
+	public Collection<Factura> mostrarListadoFacturasFechas(String nif, Calendar fechaInicio, Calendar fechaFin) throws ExcepcionClienteNoEncontrado, ExcepcionListaFacturasVacia, ExcepcionFechas {
+		if(fechaInicio.after(fechaFin))
+			throw new ExcepcionFechas();
+		
+		if(!this.facturas.containsKey(nif))
+			throw new ExcepcionClienteNoEncontrado();
+		
 		Collection<Factura> facturas = this.facturas.get(nif);
 		facturas = FechaGenerico.getConjuntoPorFecha(facturas, fechaInicio, fechaFin);
+		
+		if(facturas.isEmpty())
+			throw new ExcepcionListaFacturasVacia();
+		
 		return facturas;
 	}
 
