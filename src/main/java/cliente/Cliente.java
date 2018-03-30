@@ -45,6 +45,22 @@ public class Cliente implements Fecha, Serializable {
 		return fechaDeAlta;
 	}
 	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public Direccion getDireccion() {
+		return direccion;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public Calendar getFechaDeAlta() {
+		return fechaDeAlta;
+	}
+
 	public String getNIF() {
 		return this.NIF;
 	}

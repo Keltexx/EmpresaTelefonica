@@ -30,4 +30,17 @@ public class Particular extends Cliente{
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
+	
+	public String toString() {
+		return "Particular { \n" +
+				"\t nombre = " + getNombre() + "\n" +
+				"\t apellidos = " + apellidos + "\n" +
+				"\t nif = " + getNIF() + "\n" +
+				"\t" + getDireccion() + "\n" +
+				"\t correo = " + getCorreo() + "\n" +
+				"\t fecha de alta = " + getFecha().get(Calendar.DAY_OF_MONTH) + "/" + getFecha().get(Calendar.MONTH) + "/" + getFecha().get(Calendar.YEAR) + "\n" +
+				"\t" + getTarifa() + "\n" +
+				"}";
+	}
+	
 }
