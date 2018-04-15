@@ -32,16 +32,16 @@ public class ClienteTest {
 		generador = new GeneradorDatosINE();
 		empresa = new Empresa(generador.getNombre(), generador.getNIF(),
 				new Direccion(12345, generador.getPoblacion(generador.getProvincia()), generador.getProvincia()),
-				"empresa@empresa.com",Calendar.getInstance(),new Tarifa(5));
+				"empresa@empresa.com",Calendar.getInstance(),new TarifaBasica(5));
 		particular = new Particular(generador.getNombre(),generador.getApellido(), generador.getNIF(),
 				new Direccion(23456, generador.getPoblacion(generador.getProvincia()), generador.getProvincia()),
-				"particular@particular.com",Calendar.getInstance(),new Tarifa(10));
+				"particular@particular.com",Calendar.getInstance(),new TarifaBasica(10));
 		hombre = new Particular(generador.getNombreHombre(),generador.getApellido(), generador.getNIF(),
 				new Direccion(34567, generador.getPoblacion(generador.getProvincia()), generador.getProvincia()),
-				"hombre@hombre.com",Calendar.getInstance(),new Tarifa(7));
+				"hombre@hombre.com",Calendar.getInstance(),new TarifaBasica(7));
 		mujer =new Particular(generador.getNombreMujer(),generador.getApellido(), generador.getNIF(),
 				new Direccion(45678, generador.getPoblacion(generador.getProvincia()), generador.getProvincia()),
-				"mujer@mujer.com",Calendar.getInstance(),new Tarifa(8));
+				"mujer@mujer.com",Calendar.getInstance(),new TarifaBasica(8));
 	}
 
 	@After
@@ -82,10 +82,10 @@ public class ClienteTest {
 		gestion.darDeAltaCliente(hombre);
 		gestion.darDeAltaCliente(mujer);
 		
-		assertTrue(gestion.cambiarTarifa(empresa.getNIF(), new Tarifa(1)));
-		assertTrue(gestion.cambiarTarifa(particular.getNIF(), new Tarifa(1)));
-		assertTrue(gestion.cambiarTarifa(hombre.getNIF(), new Tarifa(1)));
-		assertTrue(gestion.cambiarTarifa(mujer.getNIF(), new Tarifa(1)));
+		assertTrue(gestion.cambiarTarifa(empresa.getNIF(), new TarifaBasica(1)));
+		assertTrue(gestion.cambiarTarifa(particular.getNIF(), new TarifaBasica(1)));
+		assertTrue(gestion.cambiarTarifa(hombre.getNIF(), new TarifaBasica(1)));
+		assertTrue(gestion.cambiarTarifa(mujer.getNIF(), new TarifaBasica(1)));
 	}
 	
 	@Test 

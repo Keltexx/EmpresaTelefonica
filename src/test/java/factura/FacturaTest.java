@@ -35,7 +35,7 @@ public class FacturaTest {
 		generador = new GeneradorDatosINE();
 		cliente= new Cliente(generador.getNombre(), generador.getNIF(),
 				new Direccion(12345, generador.getPoblacion(generador.getProvincia()), generador.getProvincia()),
-				"empresa@empresa.com",Calendar.getInstance(),new Tarifa(10));
+				"empresa@empresa.com",Calendar.getInstance(),new TarifaBasica(10));
 		llamada1= new Llamada(666777888,Calendar.getInstance(),20);
 		llamada2= new Llamada(666777888,Calendar.getInstance(),10);
 		llamada3= new Llamada(777888999,Calendar.getInstance(),18);
@@ -44,7 +44,7 @@ public class FacturaTest {
 		
 		Calendar fechaFacturacion = Calendar.getInstance();
 		fechaFacturacion.set(Calendar.MONTH, fechaFacturacion.get(Calendar.MONTH) - 1);
-		factura = new Factura(0,new Tarifa(10),fechaFacturacion,8);
+		factura = new Factura(0,new TarifaBasica(10),fechaFacturacion,8);
 		
 		gestion.darDeAltaLlamada(cliente.getNIF(), llamada1);
 		gestion.darDeAltaLlamada(cliente.getNIF(), llamada2);

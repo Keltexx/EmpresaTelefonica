@@ -33,7 +33,7 @@ public class LlamadaTest {
 		generador = new GeneradorDatosINE();
 		cliente= new Cliente(generador.getNombre(), generador.getNIF(),
 				new Direccion(12345, generador.getPoblacion(generador.getProvincia()), generador.getProvincia()),
-				"empresa@empresa.com",Calendar.getInstance(),new Tarifa(5));
+				"empresa@empresa.com",Calendar.getInstance(),new TarifaBasica(5));
 		llamada1= new Llamada(666777888,Calendar.getInstance(),2);
 		llamada2= new Llamada(666777888,Calendar.getInstance(),6);
 		llamada3= new Llamada(777888999,Calendar.getInstance(),3);
