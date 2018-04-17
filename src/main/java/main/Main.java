@@ -172,9 +172,9 @@ public class Main {
 		
 		Cliente cliente;
 		if(empresa.equals("s"))
-			cliente = new Empresa(nombre,nif,dir,correo,fecha,tarifa);	
+			cliente = ClienteFactory.crearCliente(0,nombre, apellidos ,nif,dir,correo,fecha,tarifa);	
 		else
-			cliente = new Particular(nombre, apellidos, nif, dir, correo, fecha, tarifa);
+			cliente = ClienteFactory.crearCliente(1,nombre, apellidos, nif, dir, correo, fecha, tarifa);
 		
 		try {
 			gestion.darDeAltaCliente(cliente);
