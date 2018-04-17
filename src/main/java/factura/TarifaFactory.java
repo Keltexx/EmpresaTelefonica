@@ -1,7 +1,5 @@
 package factura;
 
-import java.util.Calendar;
-
 import factura.Tarifa;
 
 public class TarifaFactory {
@@ -13,9 +11,13 @@ public class TarifaFactory {
 			tarifa = new TarifaBasica(importe);
 			break;
 		case 1:
-			tarifa = new ConTarifaFinDeSemana();
+			tarifa = new ConTarifaFinDeSemana(tarifa,importe);
 			break;
+		case 2:
+			tarifa = new ConTarifaMañanas(tarifa,importe);
+			break;			
 		}
+		
 		return tarifa;
 	}
 }

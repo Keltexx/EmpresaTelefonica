@@ -168,7 +168,7 @@ public class Main {
 		Calendar fecha = Calendar.getInstance();
 		fecha.set(año, mes, dia);
 		
-		Tarifa tarifa = new TarifaBasica(Double.parseDouble(consola.pedirDato("Introduce tarifa: ")));
+		Tarifa tarifa = TarifaFactory.crearTarifa(0, Double.parseDouble(consola.pedirDato("Introduce tarifa: ")));
 		
 		Cliente cliente;
 		if(empresa.equals("s"))
