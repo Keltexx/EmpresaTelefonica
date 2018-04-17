@@ -10,10 +10,10 @@ public class TarifaFactory {
 			tarifa = new TarifaBasica(importe);
 			break;
 		case 1:
-			tarifa = new ConTarifaFinDeSemana(tarifa,importe);
+			tarifa = new ConTarifaDomingo(tarifa,importe);
 			break;
 		case 2:
-			tarifa = new ConTarifaMañanas(tarifa,importe);
+			tarifa = new ConTarifaTardes(tarifa,importe);
 			break;			
 		}
 		
