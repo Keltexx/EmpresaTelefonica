@@ -168,7 +168,8 @@ public class Main {
 		Calendar fecha = Calendar.getInstance();
 		fecha.set(año, mes, dia);
 		
-		Tarifa tarifa = new TarifaBasica(Double.parseDouble(consola.pedirDato("Introduce tarifa: ")));
+		Tarifa tarifa = null;
+		tarifa = TarifaFactory.crearTarifa(0,tarifa, Double.parseDouble(consola.pedirDato("Introduce tarifa: ")));
 		
 		Cliente cliente;
 		if(empresa.equals("s"))
@@ -198,7 +199,8 @@ public class Main {
 	
 	private void cambiarTarifa() {
 		String nif = consola.pedirDato("Introduce NIF: ");
-		Tarifa tarifa = new TarifaBasica(Double.parseDouble(consola.pedirDato("Introduce tarifa: ")));
+		Tarifa tarifa = null;
+		tarifa = TarifaFactory.crearTarifa(0,tarifa,Double.parseDouble(consola.pedirDato("Introduce tarifa: ")));
 		try {
 			gestion.cambiarTarifa(nif, tarifa);
 			consola.mostrarDato("\nTarifa cambiada con exito \n\n");
