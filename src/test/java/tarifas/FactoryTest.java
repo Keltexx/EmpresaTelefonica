@@ -12,7 +12,10 @@ import cliente.ClienteFactory;
 import cliente.Direccion;
 import cliente.Empresa;
 import cliente.Particular;
+import factura.ConTarifaDomingo;
+import factura.ConTarifaTardes;
 import factura.TarifaBasica;
+import factura.TarifaFactory;
 
 
 public class FactoryTest {
@@ -59,4 +62,22 @@ public class FactoryTest {
 
 	}
 
+	
+	@Test
+	public void testTarifa() {
+		TarifaBasica tarifaB = null;
+        tarifaB= (TarifaBasica) TarifaFactory.crearTarifa(0, tarifaB, 5);
+        assertEquals(tarifa.getImporte(),tarifaB.getImporte(), -1);
+        
+        ConTarifaDomingo tarifaD = (ConTarifaDomingo) TarifaFactory.crearTarifa(1, tarifaB, 2);
+        tarifa = new ConTarifaDomingo(tarifa, 2);
+        assertEquals(tarifa.getImporte(),tarifaD.getImporte(), -1);
+        
+        ConTarifaTardes tarifaT = (ConTarifaTardes) TarifaFactory.crearTarifa(2, tarifaB, 3);
+        tarifa = new ConTarifaTardes(tarifa, 3);
+        assertEquals(tarifa.getImporte(),tarifaT.getImporte(), -1);
+        
+	}
+	
+	
 }
