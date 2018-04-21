@@ -75,8 +75,13 @@ public class FacturaTest {
 	
 	@Test
 	public void testRecuperarDatosFacturaCodigo() throws ExcepcionFacturaNoEncontrada, ExcepcionClienteNoEncontrado {
-		assertNull(gestion.recuperarDatosFacturaCodigo(0));
-		
+		try {
+			gestion.recuperarDatosFacturaCodigo(0);
+			fail();
+		}catch(ExcepcionFacturaNoEncontrada ex) {
+			assertEquals(ex.getMessage(), "La factura con el código solicitado no existe");
+		}
+
 		Calendar fechaFacturacion = Calendar.getInstance();
 		fechaFacturacion.set(Calendar.MONTH, fechaFacturacion.get(Calendar.MONTH)-1);
 		gestion.emitirFactura(cliente.getNIF(), fechaFacturacion);
@@ -86,7 +91,11 @@ public class FacturaTest {
 	
 	@Test
 	public void testRecuperarFacturas() throws ExcepcionClienteNoEncontrado, ExcepcionListaFacturasVacia {
-		assertNull(gestion.recuperarFacturas(cliente.getNIF()));
+		try {
+			gestion.recuperarFacturas(cliente.getNIF());
+		}catch(ExcepcionClienteNoEncontrado ex) {
+			assertEquals(ex.getMessage(), "El cliente no se ha encontrado");
+		}
 		
 		Calendar fechaFacturacion = Calendar.getInstance();
 		fechaFacturacion.set(Calendar.MONTH, fechaFacturacion.get(Calendar.MONTH)-1);
