@@ -10,8 +10,7 @@ import org.junit.Before;
 import es.uji.www.GeneradorDatosINE;
 import excepciones.ExcepcionClienteNoEncontrado;
 import excepciones.ExcepcionClienteYaRegistrado;
-import gestion.Gestion;
-
+import interfazusuario.modelo.ImplementacionModelo;
 
 import java.util.Calendar;
 
@@ -20,7 +19,7 @@ import cliente.Direccion;
 
 
 public class LlamadaTest {
-	private Gestion gestion;
+	private ImplementacionModelo gestion;
 	private GeneradorDatosINE generador;
 	private Cliente cliente;
 	private Llamada llamada1;
@@ -29,7 +28,7 @@ public class LlamadaTest {
 
 	@Before
 	public void init() throws ExcepcionClienteYaRegistrado {
-		gestion=new Gestion();
+		gestion=new ImplementacionModelo();
 		generador = new GeneradorDatosINE();
 		cliente= new Cliente(generador.getNombre(), generador.getNIF(),
 				new Direccion(12345, generador.getPoblacion(generador.getProvincia()), generador.getProvincia()),

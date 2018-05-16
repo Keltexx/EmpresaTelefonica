@@ -9,12 +9,12 @@ import cliente.*;
 import consola.Consola;
 import excepciones.*;
 import factura.*;
-import gestion.Gestion;
+import interfazusuario.modelo.ImplementacionModelo;
 import menu.*;
 
 public class Main {
 	private Consola consola = new Consola();
-	private Gestion gestion = new Gestion();
+	private ImplementacionModelo gestion = new ImplementacionModelo();
 	
 	private void start() {
 		gestion.cargarDatos();

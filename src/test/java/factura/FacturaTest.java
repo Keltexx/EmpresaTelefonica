@@ -12,7 +12,7 @@ import excepciones.ExcepcionClienteNoEncontrado;
 import excepciones.ExcepcionClienteYaRegistrado;
 import excepciones.ExcepcionFacturaNoEncontrada;
 import excepciones.ExcepcionListaFacturasVacia;
-import gestion.Gestion;
+import interfazusuario.modelo.ImplementacionModelo;
 
 import java.util.Calendar;
 
@@ -21,7 +21,7 @@ import cliente.Direccion;
 
 
 public class FacturaTest {
-	private Gestion gestion;
+	private ImplementacionModelo gestion;
 	private GeneradorDatosINE generador;
 	private Cliente cliente;
 	private Llamada llamada1;
@@ -31,7 +31,7 @@ public class FacturaTest {
 
 	@Before
 	public void init() throws ExcepcionClienteYaRegistrado, ExcepcionClienteNoEncontrado {
-		gestion=new Gestion();
+		gestion=new ImplementacionModelo();
 		generador = new GeneradorDatosINE();
 		cliente= new Cliente(generador.getNombre(), generador.getNIF(),
 				new Direccion(12345, generador.getPoblacion(generador.getProvincia()), generador.getProvincia()),
