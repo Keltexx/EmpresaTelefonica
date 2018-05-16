@@ -23,14 +23,14 @@ public class TarifasTest {
 		@Before
 		public void init() {
 			Calendar fecha = Calendar.getInstance();
-			fecha.set(Calendar.DAY_OF_WEEK, 6);
+			fecha.set(Calendar.DAY_OF_WEEK, 7);
 			llamada = new Llamada(666666666,fecha,500);
 			Calendar fecha2 = Calendar.getInstance();
-			fecha2.set(Calendar.HOUR,17);
+			fecha2.set(Calendar.HOUR_OF_DAY,17);
 			llamada2 = new Llamada(666777888,fecha2,600);
 			Calendar fecha3 = Calendar.getInstance();
-			fecha3.set(Calendar.DAY_OF_WEEK, 6);
-			fecha3.set(Calendar.HOUR, 18);
+			fecha3.set(Calendar.DAY_OF_WEEK, 7);
+			fecha3.set(Calendar.HOUR_OF_DAY, 18);
 			llamada3 = new Llamada(655666666, fecha3, 300);
 			tarifa = new TarifaBasica(10);
 		}
