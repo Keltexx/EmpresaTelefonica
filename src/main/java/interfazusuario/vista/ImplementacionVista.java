@@ -11,10 +11,13 @@ import java.sql.Time;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import interfazusuario.controlador.Controlador;
@@ -25,7 +28,9 @@ public class ImplementacionVista implements Vista {
 	private Modelo modelo;
 	private JFrame ventana = null;
 	Container contenedor = null;
-
+	JPanel panelCentral = null;
+	JPanel panelAbajo = null;
+	
 	public void setModelo(Modelo modelo) {
 		this.modelo = modelo;
 	}
@@ -42,7 +47,6 @@ public class ImplementacionVista implements Vista {
 		contenedor = ventana.getContentPane();
 		EscuchadorPrincipal escuchador = new EscuchadorPrincipal();
 		JPanel panelArriba = new JPanel();
-		//panelArriba.setLayout(new BoxLayout(panelArriba, BoxLayout.LINE_AXIS));
 		JButton boton = new JButton("Gestión clientes");
 		boton.addActionListener(escuchador);
 		panelArriba.add(boton);
@@ -53,7 +57,8 @@ public class ImplementacionVista implements Vista {
 		boton.addActionListener(escuchador);
 		panelArriba.add(boton);
 		contenedor.add(panelArriba, BorderLayout.NORTH);
-	
+		panelCentral = new JPanel();
+		contenedor.add(panelCentral, BorderLayout.CENTER);
 		ventana.setSize(1280, 720);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setVisible(true);
@@ -61,25 +66,166 @@ public class ImplementacionVista implements Vista {
 	}
 
 	private void GUICliente() {
-		JPanel panelCentral = new JPanel();
-		contenedor = ventana.getContentPane();
-		panelCentral.setLayout(new BoxLayout(panelCentral, BoxLayout.LINE_AXIS));
+		JPanel menu = new JPanel();
+		panelCentral.removeAll();
+		EscuchadorCliente escuchador = new EscuchadorCliente();
+		menu.setLayout(new BoxLayout(menu, BoxLayout.LINE_AXIS));
 		JButton boton = new JButton("Nuevo cliente");
-		panelCentral.add(boton);
+		boton.addActionListener(escuchador);
+		menu.add(boton);
 		boton = new JButton("Borrar cliente");
-		panelCentral.add(boton);
+		menu.add(boton);
 		boton = new JButton("Cambiar tarifa");
-		panelCentral.add(boton);
+		menu.add(boton);
 		boton = new JButton("Recuperar datos cliente");
-		panelCentral.add(boton);
+		menu.add(boton);
 		boton = new JButton("Recuperar listado clientes");
-		panelCentral.add(boton);
+		menu.add(boton);
 		boton = new JButton("Recuperar listado clientes entre fechas");
-		panelCentral.add(boton);
-		contenedor.add(panelCentral, BorderLayout.WEST);
+		menu.add(boton);
+		panelCentral.add(menu, BorderLayout.NORTH);
+		panelAbajo = new JPanel();
+		panelCentral.add(panelAbajo, BorderLayout.CENTER);
+		panelCentral.updateUI();
 	}
 
+	private void GUILlamada() {
+		JPanel menu = new JPanel();
+		panelCentral.removeAll();
+		menu.setLayout(new BoxLayout(menu, BoxLayout.LINE_AXIS));
+		JButton boton = new JButton("Dar alta llamada");
+		menu.add(boton);
+		boton = new JButton("Listar llamadas cliente");
+		menu.add(boton);
+		boton = new JButton("Listar llamadas cliente entre fechas");
+		menu.add(boton);
+		panelCentral.add(menu, BorderLayout.NORTH);
+		panelAbajo = new JPanel();
+		panelCentral.add(panelAbajo, BorderLayout.CENTER);
+		panelCentral.updateUI();
+	}
+	
+	private void GUIFactura() {
+		JPanel menu = new JPanel();
+		panelCentral.removeAll();
+		menu.setLayout(new BoxLayout(menu, BoxLayout.LINE_AXIS));
+		JButton boton = new JButton("Emitir factura");
+		menu.add(boton);
+		boton = new JButton("Recuperar datos factura");
+		menu.add(boton);
+		boton = new JButton("Recuperar todas las facturas");
+		menu.add(boton);
+		boton = new JButton("Recuperar listado facturas entre fechas");
+		menu.add(boton);
+		panelCentral.add(menu, BorderLayout.NORTH);
+		panelAbajo = new JPanel();
+		panelCentral.add(panelAbajo, BorderLayout.CENTER);
+		panelCentral.updateUI();
+	}
 
+	
+	private void GUIDarAlta(){
+		panelAbajo.removeAll();
+		panelAbajo.setLayout(new BoxLayout(panelAbajo, BoxLayout.PAGE_AXIS));
+		
+		JPanel panelEmpresa = new JPanel();
+		JRadioButton si = new JRadioButton("si");
+		JRadioButton no = new JRadioButton("no");
+		panelEmpresa.add(new JLabel("¿Eres una empresa?"));
+		panelEmpresa.add(si);
+		panelEmpresa.add(no);
+		ButtonGroup grupo = new ButtonGroup();
+		grupo.add(si);
+		grupo.add(no);
+		
+		panelAbajo.add(panelEmpresa);
+		
+		JPanel panelNombre = new JPanel();
+		JTextField nombre = new JTextField(20);
+		JLabel nombreLabel = new JLabel("Nombre: ");
+		panelNombre.add(nombreLabel);
+		panelNombre.add(nombre);
+		
+		panelAbajo.add(panelNombre);
+		
+		JPanel panelApellido = new JPanel();
+		JTextField apellido = new JTextField(20);
+		JLabel apellidoLabel = new JLabel("Apellido (Sólo si eres un particular): ");
+		panelApellido.add(apellidoLabel);
+		panelApellido.add(apellido);
+		
+		panelAbajo.add(panelApellido);
+		
+		JPanel panelNif = new JPanel();
+		JTextField nif = new JTextField(8);
+		JLabel nifLabel = new JLabel("NIF: ");
+		panelNif.add(nifLabel);
+		panelNif.add(nif);
+		
+		panelAbajo.add(panelNif);
+		
+		JPanel panelDireccion = new JPanel();
+		JTextField codPos = new JTextField(5);
+		JTextField prov = new JTextField(20);
+		JTextField pob = new JTextField(30);
+		JLabel direccionLabel = new JLabel("Dirección: ");
+		JLabel codPosLabel = new JLabel("Código Postal: ");
+		JLabel provLabel = new JLabel("Provincia: ");
+		JLabel pobLabel = new JLabel("Población: ");
+		panelDireccion.add(direccionLabel);
+		panelDireccion.add(codPosLabel);
+		panelDireccion.add(codPos);
+		panelDireccion.add(provLabel);
+		panelDireccion.add(prov);
+		panelDireccion.add(pobLabel);
+		panelDireccion.add(pob);
+		
+		panelAbajo.add(panelDireccion);
+		
+		JPanel panelCorreo = new JPanel();
+		JTextField correo = new JTextField(30);
+		JLabel correoLabel = new JLabel("Correo: ");
+		panelCorreo.add(correoLabel);
+		panelCorreo.add(correo);
+		
+		panelAbajo.add(panelCorreo);
+		
+		JPanel panelFecha = new JPanel();
+		JTextField año = new JTextField(4);
+		JTextField mes = new JTextField(2);
+		JTextField dia = new JTextField(2);
+		JLabel fechaLabel = new JLabel("Fecha de alta: ");
+		JLabel añoLabel = new JLabel("Año: ");
+		JLabel mesLabel = new JLabel("Mes(numérico): ");
+		JLabel diaLabel = new JLabel("Día: ");
+		panelFecha.add(fechaLabel);
+		panelFecha.add(añoLabel);
+		panelFecha.add(año);
+		panelFecha.add(mesLabel);
+		panelFecha.add(mes);
+		panelFecha.add(diaLabel);
+		panelFecha.add(dia);
+		
+		panelAbajo.add(panelFecha);
+		
+		JPanel panelTarifa = new JPanel();
+		JTextField tarifa = new JTextField(5);
+		JLabel tarifaLabel = new JLabel("Tarifa: ");
+		panelTarifa.add(tarifaLabel);
+		panelTarifa.add(tarifa);
+		
+		panelAbajo.add(panelTarifa);
+		
+		panelTarifa.updateUI();
+		panelFecha.updateUI();
+		panelCorreo.updateUI();
+		panelDireccion.updateUI();
+		panelApellido.updateUI();
+		panelNombre.updateUI();
+		panelNif.updateUI();
+		panelEmpresa.updateUI();
+		panelAbajo.updateUI();
+	}
 
 	public void creaGUI() {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -90,6 +236,22 @@ public class ImplementacionVista implements Vista {
 		});
 	}
 
+	class EscuchadorCliente implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			JButton boton = (JButton) e.getSource();
+			String texto = boton.getText();
+			if (texto.equals("Nuevo cliente")) {
+				GUIDarAlta();
+			}
+//			if (texto.equals("Gestión llamadas")) {
+//				GUILlamada();
+//			}
+//			if (texto.equals("Gestión facturas")) {
+//				GUIFactura();
+//			}
+		}
+	}
+	
 	class EscuchadorPrincipal implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			JButton boton = (JButton) e.getSource();
@@ -98,10 +260,10 @@ public class ImplementacionVista implements Vista {
 				GUICliente();
 			}
 			if (texto.equals("Gestión llamadas")) {
-				// GUILlamadas();
+				GUILlamada();
 			}
 			if (texto.equals("Gestión facturas")) {
-				// GUIFacturas();
+				GUIFactura();
 			}
 		}
 	}
