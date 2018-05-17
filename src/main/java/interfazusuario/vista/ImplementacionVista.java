@@ -74,6 +74,7 @@ public class ImplementacionVista implements Vista {
 		boton.addActionListener(escuchador);
 		menu.add(boton);
 		boton = new JButton("Borrar cliente");
+		boton.addActionListener(escuchador);
 		menu.add(boton);
 		boton = new JButton("Cambiar tarifa");
 		menu.add(boton);
@@ -85,6 +86,7 @@ public class ImplementacionVista implements Vista {
 		menu.add(boton);
 		panelCentral.add(menu, BorderLayout.NORTH);
 		panelAbajo = new JPanel();
+		panelAbajo.setLayout(new BoxLayout(panelAbajo, BoxLayout.PAGE_AXIS));
 		panelCentral.add(panelAbajo, BorderLayout.CENTER);
 		panelCentral.updateUI();
 	}
@@ -126,7 +128,7 @@ public class ImplementacionVista implements Vista {
 	
 	private void GUIDarAlta(){
 		panelAbajo.removeAll();
-		panelAbajo.setLayout(new BoxLayout(panelAbajo, BoxLayout.PAGE_AXIS));
+		
 		
 		JPanel panelEmpresa = new JPanel();
 		JRadioButton si = new JRadioButton("si");
@@ -172,6 +174,7 @@ public class ImplementacionVista implements Vista {
 		JLabel codPosLabel = new JLabel("Código Postal: ");
 		JLabel provLabel = new JLabel("Provincia: ");
 		JLabel pobLabel = new JLabel("Población: ");
+		
 		panelDireccion.add(direccionLabel);
 		panelDireccion.add(codPosLabel);
 		panelDireccion.add(codPos);
@@ -216,6 +219,13 @@ public class ImplementacionVista implements Vista {
 		
 		panelAbajo.add(panelTarifa);
 		
+		JPanel panelSubmit = new JPanel();
+		JButton submit = new JButton("Enviar");
+		panelSubmit.add(submit);
+		
+		panelAbajo.add(submit);
+		
+		panelSubmit.updateUI();
 		panelTarifa.updateUI();
 		panelFecha.updateUI();
 		panelCorreo.updateUI();
@@ -227,6 +237,33 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.updateUI();
 	}
 
+	private void GUIBorrarCliente() {
+		panelAbajo.removeAll();
+
+		
+
+		JPanel panelNif = new JPanel();
+		JTextField nif = new JTextField(8);
+		JLabel nifLabel = new JLabel("NIF: ");
+		panelNif.add(nifLabel);
+		panelNif.add(nif);
+		
+		panelAbajo.add(panelNif);
+		
+
+		
+		JPanel panelSubmit = new JPanel();
+		JButton submit = new JButton("Enviar");
+		panelSubmit.add(submit);
+		
+		panelAbajo.add(submit);
+		
+		panelSubmit.updateUI();
+		
+		panelNif.updateUI();
+		panelAbajo.updateUI();
+	}
+	
 	public void creaGUI() {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
@@ -243,9 +280,9 @@ public class ImplementacionVista implements Vista {
 			if (texto.equals("Nuevo cliente")) {
 				GUIDarAlta();
 			}
-//			if (texto.equals("Gestión llamadas")) {
-//				GUILlamada();
-//			}
+			if (texto.equals("Borrar cliente")) {
+				GUIBorrarCliente();
+			}
 //			if (texto.equals("Gestión facturas")) {
 //				GUIFactura();
 //			}
