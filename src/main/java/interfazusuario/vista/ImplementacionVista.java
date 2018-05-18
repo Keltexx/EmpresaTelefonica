@@ -42,8 +42,8 @@ public class ImplementacionVista implements Vista {
 	public ImplementacionVista() {
 	}
 
-	//GUI PRINCIPAL
-	
+	// GUI PRINCIPAL
+
 	private void GUI() {
 		ventana = new JFrame("Empresa Telefónica");
 		contenedor = ventana.getContentPane();
@@ -67,8 +67,8 @@ public class ImplementacionVista implements Vista {
 
 	}
 
-	//GUI MENU
-	
+	// GUI MENU
+
 	private void GUICliente() {
 		JPanel menu = new JPanel();
 		panelCentral.removeAll();
@@ -124,22 +124,28 @@ public class ImplementacionVista implements Vista {
 		JPanel menu = new JPanel();
 		panelCentral.removeAll();
 		menu.setLayout(new BoxLayout(menu, BoxLayout.LINE_AXIS));
+		EscuchadorFactura escuchador = new EscuchadorFactura();
 		JButton boton = new JButton("Emitir factura");
+		boton.addActionListener(escuchador);
 		menu.add(boton);
 		boton = new JButton("Recuperar datos factura");
+		boton.addActionListener(escuchador);
 		menu.add(boton);
 		boton = new JButton("Recuperar todas las facturas");
+		boton.addActionListener(escuchador);
 		menu.add(boton);
 		boton = new JButton("Recuperar listado facturas entre fechas");
+		boton.addActionListener(escuchador);
 		menu.add(boton);
 		panelCentral.add(menu, BorderLayout.NORTH);
 		panelAbajo = new JPanel();
+		panelAbajo.setLayout(new BoxLayout(panelAbajo, BoxLayout.PAGE_AXIS));
 		panelCentral.add(panelAbajo, BorderLayout.CENTER);
 		panelCentral.updateUI();
 	}
 
-	//GUI CLIENTE
-	
+	// GUI CLIENTE
+
 	private void GUIDarAlta() {
 		panelAbajo.removeAll();
 
@@ -233,12 +239,13 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelTarifa);
 
 		JPanel panelEspacio = new JPanel();
-		JLabel espacioLabel = new JLabel("                                                                                                                                                                                                    "
-				+ "                                                                                                                                                                                               ");
+		JLabel espacioLabel = new JLabel(
+				"                                                                                                                                                                                                    "
+						+ "                                                                                                                                                                                               ");
 		panelEspacio.add(espacioLabel);
-		
+
 		panelAbajo.add(panelEspacio);
-		
+
 		JPanel panelSubmit = new JPanel();
 		JButton submit = new JButton("Enviar");
 		panelSubmit.add(submit);
@@ -258,10 +265,9 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.updateUI();
 	}
 
-
 	private void GUIBorrarCliente() {
 		panelAbajo.removeAll();
-		
+
 		JPanel panelNif = new JPanel();
 		JTextField nif = new JTextField(8);
 		JLabel nifLabel = new JLabel("NIF: ");
@@ -269,14 +275,15 @@ public class ImplementacionVista implements Vista {
 		panelNif.add(nif);
 
 		panelAbajo.add(panelNif);
-		
+
 		JPanel panelEspacio = new JPanel();
-		JLabel espacioLabel = new JLabel("                                                                                                                                                                                                    "
-				+ "                                                                                                                                                                                               ");
+		JLabel espacioLabel = new JLabel(
+				"                                                                                                                                                                                                    "
+						+ "                                                                                                                                                                                               ");
 		panelEspacio.add(espacioLabel);
-		
+
 		panelAbajo.add(panelEspacio);
-		
+
 		JPanel panelSubmit = new JPanel();
 		JButton submit = new JButton("Enviar");
 		panelSubmit.add(submit);
@@ -309,12 +316,13 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelTarifa);
 
 		JPanel panelEspacio = new JPanel();
-		JLabel espacioLabel = new JLabel("                                                                                                                                                                                                    "
-				+ "                                                                                                                                                                                               ");
+		JLabel espacioLabel = new JLabel(
+				"                                                                                                                                                                                                    "
+						+ "                                                                                                                                                                                               ");
 		panelEspacio.add(espacioLabel);
-		
+
 		panelAbajo.add(panelEspacio);
-		
+
 		JPanel panelSubmit = new JPanel();
 		JButton submit = new JButton("Enviar");
 		panelSubmit.add(submit);
@@ -340,12 +348,13 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelNif);
 
 		JPanel panelEspacio = new JPanel();
-		JLabel espacioLabel = new JLabel("                                                                                                                                                                                                    "
-				+ "                                                                                                                                                                                               ");
+		JLabel espacioLabel = new JLabel(
+				"                                                                                                                                                                                                    "
+						+ "                                                                                                                                                                                               ");
 		panelEspacio.add(espacioLabel);
-		
+
 		panelAbajo.add(panelEspacio);
-		
+
 		JPanel panelSubmit = new JPanel();
 		JButton submit = new JButton("Enviar");
 		panelSubmit.add(submit);
@@ -357,17 +366,18 @@ public class ImplementacionVista implements Vista {
 		panelNif.updateUI();
 		panelAbajo.updateUI();
 	}
-	
+
 	private void GUIRecuperarListado() {
 		panelAbajo.removeAll();
-		
+
 		JPanel panelEspacio = new JPanel();
-		JLabel espacioLabel = new JLabel("                                                                                                                                                                                                    "
-				+ "                                                                                                                                                                                               ");
+		JLabel espacioLabel = new JLabel(
+				"                                                                                                                                                                                                    "
+						+ "                                                                                                                                                                                               ");
 		panelEspacio.add(espacioLabel);
-		
+
 		panelAbajo.add(panelEspacio);
-		
+
 		JPanel panelSubmit = new JPanel();
 		JButton submit = new JButton("Recuperar");
 		panelSubmit.add(submit);
@@ -378,10 +388,10 @@ public class ImplementacionVista implements Vista {
 		panelSubmit.updateUI();
 		panelAbajo.updateUI();
 	}
-	
+
 	private void GUIRecuperarListadoEntreFechas() {
 		panelAbajo.removeAll();
-		
+
 		JPanel panelFecha = new JPanel();
 		JTextField año = new JTextField(4);
 		JTextField mes = new JTextField(2);
@@ -399,7 +409,7 @@ public class ImplementacionVista implements Vista {
 		panelFecha.add(dia);
 
 		panelAbajo.add(panelFecha);
-		
+
 		JPanel panelFecha2 = new JPanel();
 		JTextField año2 = new JTextField(4);
 		JTextField mes2 = new JTextField(2);
@@ -417,14 +427,15 @@ public class ImplementacionVista implements Vista {
 		panelFecha2.add(dia2);
 
 		panelAbajo.add(panelFecha2);
-		
+
 		JPanel panelEspacio = new JPanel();
-		JLabel espacioLabel = new JLabel("                                                                                                                                                                                                    "
-																			+ "                                                                                                                                                                                               ");
+		JLabel espacioLabel = new JLabel(
+				"                                                                                                                                                                                                    "
+						+ "                                                                                                                                                                                               ");
 		panelEspacio.add(espacioLabel);
-		
+
 		panelAbajo.add(panelEspacio);
-		
+
 		JPanel panelSubmit = new JPanel();
 		JButton submit = new JButton("Enviar");
 		panelSubmit.add(submit);
@@ -437,12 +448,12 @@ public class ImplementacionVista implements Vista {
 		panelFecha2.updateUI();
 		panelAbajo.updateUI();
 	}
-	
-	//GUI LLAMADAS
-	
+
+	// GUI LLAMADAS
+
 	private void GUIDarAltaLlamada() {
-panelAbajo.removeAll();
-		
+		panelAbajo.removeAll();
+
 		JPanel panelNif = new JPanel();
 		JTextField nif = new JTextField(8);
 		JLabel nifLabel = new JLabel("NIF: ");
@@ -450,7 +461,7 @@ panelAbajo.removeAll();
 		panelNif.add(nif);
 
 		panelAbajo.add(panelNif);
-		
+
 		JPanel panelTelf = new JPanel();
 		JTextField telf = new JTextField(12);
 		JLabel telfLabel = new JLabel("Teléfono: ");
@@ -487,19 +498,20 @@ panelAbajo.removeAll();
 
 		JPanel panelDur = new JPanel();
 		JTextField dur = new JTextField(5);
-		JLabel durLabel = new JLabel("Tarifa: ");
+		JLabel durLabel = new JLabel("Duración: ");
 		panelDur.add(durLabel);
 		panelDur.add(dur);
 
 		panelAbajo.add(panelDur);
 
 		JPanel panelEspacio = new JPanel();
-		JLabel espacioLabel = new JLabel("                                                                                                                                                                                                    "
-				+ "                                                                                                                                                                                               ");
+		JLabel espacioLabel = new JLabel(
+				"                                                                                                                                                                                                    "
+						+ "                                                                                                                                                                                               ");
 		panelEspacio.add(espacioLabel);
-		
+
 		panelAbajo.add(panelEspacio);
-		
+
 		JPanel panelSubmit = new JPanel();
 		JButton submit = new JButton("Enviar");
 		panelSubmit.add(submit);
@@ -513,15 +525,12 @@ panelAbajo.removeAll();
 		panelTelf.updateUI();
 		panelNif.updateUI();
 		panelAbajo.updateUI();
-		
-		
-		
-		
+
 	}
-	
+
 	private void GUIListarLlamadas() {
 		panelAbajo.removeAll();
-		
+
 		JPanel panelNif = new JPanel();
 		JTextField nif = new JTextField(8);
 		JLabel nifLabel = new JLabel("NIF: ");
@@ -529,14 +538,15 @@ panelAbajo.removeAll();
 		panelNif.add(nif);
 
 		panelAbajo.add(panelNif);
-		
+
 		JPanel panelEspacio = new JPanel();
-		JLabel espacioLabel = new JLabel("                                                                                                                                                                                                    "
-				+ "                                                                                                                                                                                               ");
+		JLabel espacioLabel = new JLabel(
+				"                                                                                                                                                                                                    "
+						+ "                                                                                                                                                                                               ");
 		panelEspacio.add(espacioLabel);
-		
+
 		panelAbajo.add(panelEspacio);
-		
+
 		JPanel panelSubmit = new JPanel();
 		JButton submit = new JButton("Enviar");
 		panelSubmit.add(submit);
@@ -548,10 +558,10 @@ panelAbajo.removeAll();
 		panelNif.updateUI();
 		panelAbajo.updateUI();
 	}
-	
+
 	private void GUIListarLlamadasEntreFechas() {
 		panelAbajo.removeAll();
-		
+
 		JPanel panelNif = new JPanel();
 		JTextField nif = new JTextField(8);
 		JLabel nifLabel = new JLabel("NIF: ");
@@ -559,7 +569,7 @@ panelAbajo.removeAll();
 		panelNif.add(nif);
 
 		panelAbajo.add(panelNif);
-		
+
 		JPanel panelFecha = new JPanel();
 		JTextField año = new JTextField(4);
 		JTextField mes = new JTextField(2);
@@ -577,7 +587,7 @@ panelAbajo.removeAll();
 		panelFecha.add(dia);
 
 		panelAbajo.add(panelFecha);
-		
+
 		JPanel panelFecha2 = new JPanel();
 		JTextField año2 = new JTextField(4);
 		JTextField mes2 = new JTextField(2);
@@ -595,20 +605,21 @@ panelAbajo.removeAll();
 		panelFecha2.add(dia2);
 
 		panelAbajo.add(panelFecha2);
-		
+
 		JPanel panelEspacio = new JPanel();
-		JLabel espacioLabel = new JLabel("                                                                                                                                                                                                    "
-																			+ "                                                                                                                                                                                               ");
+		JLabel espacioLabel = new JLabel(
+				"                                                                                                                                                                                                    "
+						+ "                                                                                                                                                                                               ");
 		panelEspacio.add(espacioLabel);
-		
+
 		panelAbajo.add(panelEspacio);
-		
+
 		JPanel panelSubmit = new JPanel();
 		JButton submit = new JButton("Enviar");
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
-		
+
 		panelNif.updateUI();
 		panelEspacio.updateUI();
 		panelSubmit.updateUI();
@@ -616,9 +627,194 @@ panelAbajo.removeAll();
 		panelFecha2.updateUI();
 		panelAbajo.updateUI();
 	}
-	
-	//GUI FACTURAS
-	
+
+	// GUI FACTURAS
+
+	private void GUIEmitirFactura() {
+		panelAbajo.removeAll();
+
+		JPanel panelNif = new JPanel();
+		JTextField nif = new JTextField(8);
+		JLabel nifLabel = new JLabel("NIF: ");
+		panelNif.add(nifLabel);
+		panelNif.add(nif);
+
+		panelAbajo.add(panelNif);
+
+		JPanel panelFecha = new JPanel();
+		JTextField año = new JTextField(4);
+		JTextField mes = new JTextField(2);
+		JTextField dia = new JTextField(2);
+		JLabel fechaLabel = new JLabel("Fecha: ");
+		JLabel añoLabel = new JLabel("Año: ");
+		JLabel mesLabel = new JLabel("Mes(numérico): ");
+		JLabel diaLabel = new JLabel("Día: ");
+		panelFecha.add(fechaLabel);
+		panelFecha.add(añoLabel);
+		panelFecha.add(año);
+		panelFecha.add(mesLabel);
+		panelFecha.add(mes);
+		panelFecha.add(diaLabel);
+		panelFecha.add(dia);
+
+
+		panelAbajo.add(panelFecha);
+
+		JPanel panelEspacio = new JPanel();
+		JLabel espacioLabel = new JLabel(
+				"                                                                                                                                                                                                    "
+						+ "                                                                                                                                                                                               ");
+		panelEspacio.add(espacioLabel);
+
+		panelAbajo.add(panelEspacio);
+
+		JPanel panelSubmit = new JPanel();
+		JButton submit = new JButton("Enviar");
+		panelSubmit.add(submit);
+
+		panelAbajo.add(submit);
+
+		panelEspacio.updateUI();
+		panelSubmit.updateUI();
+		panelFecha.updateUI();
+		panelNif.updateUI();
+		panelAbajo.updateUI();
+
+	}
+
+	private void GUIRecuperarDatosFactura() {
+		panelAbajo.removeAll();
+
+		JPanel panelcodFac = new JPanel();
+		JTextField codFac = new JTextField(20);
+		JLabel codFacLabel = new JLabel("Código de factura: ");
+		panelcodFac.add(codFacLabel);
+		panelcodFac.add(codFac);
+
+		panelAbajo.add(panelcodFac);
+
+		JPanel panelEspacio = new JPanel();
+		JLabel espacioLabel = new JLabel(
+				"                                                                                                                                                                                                    "
+						+ "                                                                                                                                                                                               ");
+		panelEspacio.add(espacioLabel);
+
+		panelAbajo.add(panelEspacio);
+
+		JPanel panelSubmit = new JPanel();
+		JButton submit = new JButton("Enviar");
+		panelSubmit.add(submit);
+
+		panelAbajo.add(submit);
+
+		panelSubmit.updateUI();
+		panelEspacio.updateUI();
+		panelcodFac.updateUI();
+		panelAbajo.updateUI();
+	}
+
+	private void GUIRecuperarTodasFacturas() {
+		panelAbajo.removeAll();
+
+		JPanel panelNif = new JPanel();
+		JTextField nif = new JTextField(8);
+		JLabel nifLabel = new JLabel("NIF: ");
+		panelNif.add(nifLabel);
+		panelNif.add(nif);
+
+		panelAbajo.add(panelNif);
+
+		JPanel panelEspacio = new JPanel();
+		JLabel espacioLabel = new JLabel(
+				"                                                                                                                                                                                                    "
+						+ "                                                                                                                                                                                               ");
+		panelEspacio.add(espacioLabel);
+
+		panelAbajo.add(panelEspacio);
+
+		JPanel panelSubmit = new JPanel();
+		JButton submit = new JButton("Enviar");
+		panelSubmit.add(submit);
+
+		panelAbajo.add(submit);
+
+		panelSubmit.updateUI();
+		panelEspacio.updateUI();
+		panelNif.updateUI();
+		panelAbajo.updateUI();
+	}
+
+	private void GUIRecuperarFacturasEntreFechas() {
+		panelAbajo.removeAll();
+
+		JPanel panelNif = new JPanel();
+		JTextField nif = new JTextField(8);
+		JLabel nifLabel = new JLabel("NIF: ");
+		panelNif.add(nifLabel);
+		panelNif.add(nif);
+
+		panelAbajo.add(panelNif);
+
+		JPanel panelFecha = new JPanel();
+		JTextField año = new JTextField(4);
+		JTextField mes = new JTextField(2);
+		JTextField dia = new JTextField(2);
+		JLabel fechaLabel = new JLabel("Fecha de inicio: ");
+		JLabel añoLabel = new JLabel("Año: ");
+		JLabel mesLabel = new JLabel("Mes(numérico): ");
+		JLabel diaLabel = new JLabel("Día: ");
+		panelFecha.add(fechaLabel);
+		panelFecha.add(añoLabel);
+		panelFecha.add(año);
+		panelFecha.add(mesLabel);
+		panelFecha.add(mes);
+		panelFecha.add(diaLabel);
+		panelFecha.add(dia);
+
+		panelAbajo.add(panelFecha);
+
+		JPanel panelFecha2 = new JPanel();
+		JTextField año2 = new JTextField(4);
+		JTextField mes2 = new JTextField(2);
+		JTextField dia2 = new JTextField(2);
+		JLabel fechaLabel2 = new JLabel("Fecha de fin: ");
+		JLabel añoLabel2 = new JLabel("Año: ");
+		JLabel mesLabel2 = new JLabel("Mes(numérico): ");
+		JLabel diaLabel2 = new JLabel("Día: ");
+		panelFecha2.add(fechaLabel2);
+		panelFecha2.add(añoLabel2);
+		panelFecha2.add(año2);
+		panelFecha2.add(mesLabel2);
+		panelFecha2.add(mes2);
+		panelFecha2.add(diaLabel2);
+		panelFecha2.add(dia2);
+
+		panelAbajo.add(panelFecha2);
+
+		JPanel panelEspacio = new JPanel();
+		JLabel espacioLabel = new JLabel(
+				"                                                                                                                                                                                                    "
+						+ "                                                                                                                                                                                               ");
+		panelEspacio.add(espacioLabel);
+
+		panelAbajo.add(panelEspacio);
+
+		JPanel panelSubmit = new JPanel();
+		JButton submit = new JButton("Enviar");
+		panelSubmit.add(submit);
+
+		panelAbajo.add(submit);
+
+		panelNif.updateUI();
+		panelEspacio.updateUI();
+		panelSubmit.updateUI();
+		panelFecha.updateUI();
+		panelFecha2.updateUI();
+		panelAbajo.updateUI();
+	}
+
+	// CREAR GUI
+
 	public void creaGUI() {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
@@ -626,6 +822,25 @@ panelAbajo.removeAll();
 				GUI();
 			}
 		});
+	}
+
+	class EscuchadorFactura implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			JButton boton = (JButton) e.getSource();
+			String texto = boton.getText();
+			if (texto.equals("Emitir factura")) {
+				GUIEmitirFactura();
+			}
+			if (texto.equals("Recuperar datos factura")) {
+				GUIRecuperarDatosFactura();
+			}
+			if (texto.equals("Recuperar todas las facturas")) {
+				GUIRecuperarTodasFacturas();
+			}
+			if (texto.equals("Recuperar listado facturas entre fechas")) {
+				GUIRecuperarFacturasEntreFechas();
+			}
+		}
 	}
 
 	class EscuchadorLlamada implements ActionListener {
@@ -644,7 +859,6 @@ panelAbajo.removeAll();
 		}
 	}
 
-	
 	class EscuchadorCliente implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			JButton boton = (JButton) e.getSource();
