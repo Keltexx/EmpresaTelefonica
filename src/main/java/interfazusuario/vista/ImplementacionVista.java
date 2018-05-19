@@ -30,6 +30,7 @@ public class ImplementacionVista implements Vista {
 	Container contenedor = null;
 	JPanel panelCentral = null;
 	JPanel panelAbajo = null;
+	JPanel panelFinal = null;
 
 	public void setModelo(Modelo modelo) {
 		this.modelo = modelo;
@@ -897,6 +898,13 @@ public class ImplementacionVista implements Vista {
 			if (texto.equals("Gestión facturas")) {
 				GUIFactura();
 			}
+		}
+	}
+	
+	class EscuchadorClienteControlador implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			JButton boton = (JButton) e.getSource();
+			String texto = boton.getText();
 		}
 	}
 
