@@ -241,8 +241,8 @@ public class ImplementacionVista implements Vista {
 
 		JPanel panelEspacio = new JPanel();
 		JLabel espacioLabel = new JLabel(
-				"                                                                                                                                                                                                    "
-						+ "                                                                                                                                                                                               ");
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
 		panelEspacio.add(espacioLabel);
 
 		panelAbajo.add(panelEspacio);
@@ -279,8 +279,8 @@ public class ImplementacionVista implements Vista {
 
 		JPanel panelEspacio = new JPanel();
 		JLabel espacioLabel = new JLabel(
-				"                                                                                                                                                                                                    "
-						+ "                                                                                                                                                                                               ");
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
 		panelEspacio.add(espacioLabel);
 
 		panelAbajo.add(panelEspacio);
@@ -318,8 +318,8 @@ public class ImplementacionVista implements Vista {
 
 		JPanel panelEspacio = new JPanel();
 		JLabel espacioLabel = new JLabel(
-				"                                                                                                                                                                                                    "
-						+ "                                                                                                                                                                                               ");
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
 		panelEspacio.add(espacioLabel);
 
 		panelAbajo.add(panelEspacio);
@@ -350,8 +350,8 @@ public class ImplementacionVista implements Vista {
 
 		JPanel panelEspacio = new JPanel();
 		JLabel espacioLabel = new JLabel(
-				"                                                                                                                                                                                                    "
-						+ "                                                                                                                                                                                               ");
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
 		panelEspacio.add(espacioLabel);
 
 		panelAbajo.add(panelEspacio);
@@ -373,8 +373,8 @@ public class ImplementacionVista implements Vista {
 
 		JPanel panelEspacio = new JPanel();
 		JLabel espacioLabel = new JLabel(
-				"                                                                                                                                                                                                    "
-						+ "                                                                                                                                                                                               ");
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
 		panelEspacio.add(espacioLabel);
 
 		panelAbajo.add(panelEspacio);
@@ -431,8 +431,8 @@ public class ImplementacionVista implements Vista {
 
 		JPanel panelEspacio = new JPanel();
 		JLabel espacioLabel = new JLabel(
-				"                                                                                                                                                                                                    "
-						+ "                                                                                                                                                                                               ");
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
 		panelEspacio.add(espacioLabel);
 
 		panelAbajo.add(panelEspacio);
@@ -507,8 +507,8 @@ public class ImplementacionVista implements Vista {
 
 		JPanel panelEspacio = new JPanel();
 		JLabel espacioLabel = new JLabel(
-				"                                                                                                                                                                                                    "
-						+ "                                                                                                                                                                                               ");
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
 		panelEspacio.add(espacioLabel);
 
 		panelAbajo.add(panelEspacio);
@@ -542,8 +542,8 @@ public class ImplementacionVista implements Vista {
 
 		JPanel panelEspacio = new JPanel();
 		JLabel espacioLabel = new JLabel(
-				"                                                                                                                                                                                                    "
-						+ "                                                                                                                                                                                               ");
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
 		panelEspacio.add(espacioLabel);
 
 		panelAbajo.add(panelEspacio);
@@ -609,8 +609,8 @@ public class ImplementacionVista implements Vista {
 
 		JPanel panelEspacio = new JPanel();
 		JLabel espacioLabel = new JLabel(
-				"                                                                                                                                                                                                    "
-						+ "                                                                                                                                                                                               ");
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
 		panelEspacio.add(espacioLabel);
 
 		panelAbajo.add(panelEspacio);
@@ -663,8 +663,8 @@ public class ImplementacionVista implements Vista {
 
 		JPanel panelEspacio = new JPanel();
 		JLabel espacioLabel = new JLabel(
-				"                                                                                                                                                                                                    "
-						+ "                                                                                                                                                                                               ");
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
 		panelEspacio.add(espacioLabel);
 
 		panelAbajo.add(panelEspacio);
@@ -696,8 +696,8 @@ public class ImplementacionVista implements Vista {
 
 		JPanel panelEspacio = new JPanel();
 		JLabel espacioLabel = new JLabel(
-				"                                                                                                                                                                                                    "
-						+ "                                                                                                                                                                                               ");
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
 		panelEspacio.add(espacioLabel);
 
 		panelAbajo.add(panelEspacio);
@@ -727,8 +727,8 @@ public class ImplementacionVista implements Vista {
 
 		JPanel panelEspacio = new JPanel();
 		JLabel espacioLabel = new JLabel(
-				"                                                                                                                                                                                                    "
-						+ "                                                                                                                                                                                               ");
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
 		panelEspacio.add(espacioLabel);
 
 		panelAbajo.add(panelEspacio);
@@ -794,8 +794,8 @@ public class ImplementacionVista implements Vista {
 
 		JPanel panelEspacio = new JPanel();
 		JLabel espacioLabel = new JLabel(
-				"                                                                                                                                                                                                    "
-						+ "                                                                                                                                                                                               ");
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
 		panelEspacio.add(espacioLabel);
 
 		panelAbajo.add(panelEspacio);
