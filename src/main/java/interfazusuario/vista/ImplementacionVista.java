@@ -7,7 +7,10 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.Time;
+import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.BoxLayout;
@@ -20,6 +23,12 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+import cliente.Direccion;
+import excepciones.ExcepcionClienteNoEncontrado;
+import excepciones.ExcepcionClienteYaRegistrado;
+import excepciones.ExcepcionListaClientesVacia;
+import factura.Tarifa;
+import factura.TarifaFactory;
 import interfazusuario.controlador.Controlador;
 import interfazusuario.modelo.Modelo;
 
@@ -30,7 +39,28 @@ public class ImplementacionVista implements Vista {
 	Container contenedor = null;
 	JPanel panelCentral = null;
 	JPanel panelAbajo = null;
-	JPanel panelFinal = null;
+	JPanel panelFinal = new JPanel();
+	JTextField nif = null;
+	JTextField nombre = null;
+	JTextField  apellido = null;
+	JTextField codPos = null;
+	JTextField pob = null;
+	JTextField prov = null;
+	JTextField correo = null;
+	JTextField dia = null;
+	JTextField mes = null;
+	JTextField año = null;
+	JTextField tarifa = null;
+	JTextField dia2 = null;
+	JTextField mes2 = null;
+	JTextField año2 = null;
+	JTextField telf = null;
+	JTextField codFac = null;
+	JTextField hora = null;
+	JTextField minuto = null;
+	JButton submit = null;
+	int tipo;
+	JTextField tipoTar;
 
 	public void setModelo(Modelo modelo) {
 		this.modelo = modelo;
@@ -153,6 +183,21 @@ public class ImplementacionVista implements Vista {
 		JPanel panelEmpresa = new JPanel();
 		JRadioButton si = new JRadioButton("si");
 		JRadioButton no = new JRadioButton("no");
+		si.setActionCommand("si");
+		ItemListener escuchador;
+		si.addItemListener(escuchador = new ItemListener() {
+		    @Override
+		    public void itemStateChanged(ItemEvent e) {
+		        JRadioButton boton = (JRadioButton)e.getItemSelectable();
+		        String comando = boton.getActionCommand();
+		        switch(e.getStateChange()) {
+		            case ItemEvent.SELECTED:
+		              tipo = 0;
+		              break;
+		            case ItemEvent.DESELECTED:
+		             tipo = 1;
+		              break;
+		        }    }    });
 		panelEmpresa.add(new JLabel("¿Eres una empresa?"));
 		panelEmpresa.add(si);
 		panelEmpresa.add(no);
@@ -163,7 +208,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelEmpresa);
 
 		JPanel panelNombre = new JPanel();
-		JTextField nombre = new JTextField(20);
+		nombre = new JTextField(20);
 		JLabel nombreLabel = new JLabel("Nombre: ");
 		panelNombre.add(nombreLabel);
 		panelNombre.add(nombre);
@@ -171,7 +216,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelNombre);
 
 		JPanel panelApellido = new JPanel();
-		JTextField apellido = new JTextField(20);
+		apellido = new JTextField(20);
 		JLabel apellidoLabel = new JLabel("Apellido (Sólo si eres un particular): ");
 		panelApellido.add(apellidoLabel);
 		panelApellido.add(apellido);
@@ -179,7 +224,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelApellido);
 
 		JPanel panelNif = new JPanel();
-		JTextField nif = new JTextField(8);
+		nif = new JTextField(8);
 		JLabel nifLabel = new JLabel("NIF: ");
 		panelNif.add(nifLabel);
 		panelNif.add(nif);
@@ -187,9 +232,9 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelNif);
 
 		JPanel panelDireccion = new JPanel();
-		JTextField codPos = new JTextField(5);
-		JTextField prov = new JTextField(20);
-		JTextField pob = new JTextField(30);
+		codPos = new JTextField(5);
+		prov = new JTextField(20);
+		pob = new JTextField(30);
 		JLabel direccionLabel = new JLabel("Dirección: ");
 		JLabel codPosLabel = new JLabel("Código Postal: ");
 		JLabel provLabel = new JLabel("Provincia: ");
@@ -206,7 +251,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelDireccion);
 
 		JPanel panelCorreo = new JPanel();
-		JTextField correo = new JTextField(30);
+		correo = new JTextField(30);
 		JLabel correoLabel = new JLabel("Correo: ");
 		panelCorreo.add(correoLabel);
 		panelCorreo.add(correo);
@@ -214,9 +259,9 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelCorreo);
 
 		JPanel panelFecha = new JPanel();
-		JTextField año = new JTextField(4);
-		JTextField mes = new JTextField(2);
-		JTextField dia = new JTextField(2);
+		año = new JTextField(4);
+		mes = new JTextField(2);
+		dia = new JTextField(2);
 		JLabel fechaLabel = new JLabel("Fecha de alta: ");
 		JLabel añoLabel = new JLabel("Año: ");
 		JLabel mesLabel = new JLabel("Mes(numérico): ");
@@ -232,8 +277,8 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelFecha);
 
 		JPanel panelTarifa = new JPanel();
-		JTextField tarifa = new JTextField(5);
-		JLabel tarifaLabel = new JLabel("Tarifa: ");
+		tarifa = new JTextField(5);
+		JLabel tarifaLabel = new JLabel("Importe tarifa: ");
 		panelTarifa.add(tarifaLabel);
 		panelTarifa.add(tarifa);
 
@@ -247,12 +292,17 @@ public class ImplementacionVista implements Vista {
 
 		panelAbajo.add(panelEspacio);
 
+		EscuchadorDarAlta escuchadorDarAlta = new EscuchadorDarAlta();
 		JPanel panelSubmit = new JPanel();
-		JButton submit = new JButton("Enviar");
+		submit = new JButton("Enviar");
+		submit.addActionListener(escuchadorDarAlta);
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
 
+		
+		
+		
 		panelEspacio.updateUI();
 		panelSubmit.updateUI();
 		panelTarifa.updateUI();
@@ -270,7 +320,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.removeAll();
 
 		JPanel panelNif = new JPanel();
-		JTextField nif = new JTextField(8);
+		nif = new JTextField(8);
 		JLabel nifLabel = new JLabel("NIF: ");
 		panelNif.add(nifLabel);
 		panelNif.add(nif);
@@ -286,7 +336,9 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelEspacio);
 
 		JPanel panelSubmit = new JPanel();
-		JButton submit = new JButton("Enviar");
+		submit = new JButton("Enviar");
+		EscuchadorBorrarCliente escuchadorBorrarCliente = new EscuchadorBorrarCliente();
+		submit.addActionListener(escuchadorBorrarCliente);
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
@@ -295,27 +347,36 @@ public class ImplementacionVista implements Vista {
 		panelSubmit.updateUI();
 		panelNif.updateUI();
 		panelAbajo.updateUI();
+		
 	}
 
 	private void GUICambiarTarifa() {
 		panelAbajo.removeAll();
 
 		JPanel panelNif = new JPanel();
-		JTextField nif = new JTextField(8);
+		nif = new JTextField(8);
 		JLabel nifLabel = new JLabel("NIF: ");
 		panelNif.add(nifLabel);
 		panelNif.add(nif);
 
 		panelAbajo.add(panelNif);
 
+		JPanel panelTipoTar = new JPanel();
+		JLabel tipoTarLabel = new JLabel("Tarifa	(0 Básica) (1 Domingo) (2 Tardes): ");
+		tipoTar = new JTextField(5);
+		panelTipoTar.add(tipoTarLabel);
+		panelTipoTar.add(tipoTar);
+
+		panelAbajo.add(panelTipoTar);
+
 		JPanel panelTarifa = new JPanel();
-		JLabel tarifaLabel = new JLabel("Tarifa: ");
-		JTextField tarifa = new JTextField(5);
+		JLabel tarifaLabel = new JLabel("Importe: ");
+		tarifa = new JTextField(5);
 		panelTarifa.add(tarifaLabel);
 		panelTarifa.add(tarifa);
 
 		panelAbajo.add(panelTarifa);
-
+		
 		JPanel panelEspacio = new JPanel();
 		JLabel espacioLabel = new JLabel(
 				"                                                                                                                                                                                                                "
@@ -325,11 +386,14 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelEspacio);
 
 		JPanel panelSubmit = new JPanel();
-		JButton submit = new JButton("Enviar");
+		submit = new JButton("Enviar");
+		EscuchadorCambiarTarifa escuchadorCambiarTarifa = new EscuchadorCambiarTarifa();
+		submit.addActionListener(escuchadorCambiarTarifa);
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
 
+		panelTipoTar.updateUI();
 		panelEspacio.updateUI();
 		panelSubmit.updateUI();
 		panelTarifa.updateUI();
@@ -341,7 +405,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.removeAll();
 
 		JPanel panelNif = new JPanel();
-		JTextField nif = new JTextField(8);
+		nif = new JTextField(8);
 		JLabel nifLabel = new JLabel("NIF: ");
 		panelNif.add(nifLabel);
 		panelNif.add(nif);
@@ -357,10 +421,13 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelEspacio);
 
 		JPanel panelSubmit = new JPanel();
-		JButton submit = new JButton("Enviar");
+		submit = new JButton("Enviar");
+		EscuchadorRecuperarCliente escuchadorRecuperarCliente = new EscuchadorRecuperarCliente();
+		submit.addActionListener(escuchadorRecuperarCliente);
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
+
 
 		panelSubmit.updateUI();
 		panelEspacio.updateUI();
@@ -380,7 +447,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelEspacio);
 
 		JPanel panelSubmit = new JPanel();
-		JButton submit = new JButton("Recuperar");
+		submit = new JButton("Recuperar");
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
@@ -394,9 +461,9 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.removeAll();
 
 		JPanel panelFecha = new JPanel();
-		JTextField año = new JTextField(4);
-		JTextField mes = new JTextField(2);
-		JTextField dia = new JTextField(2);
+		año = new JTextField(4);
+		mes = new JTextField(2);
+		dia = new JTextField(2);
 		JLabel fechaLabel = new JLabel("Fecha de inicio: ");
 		JLabel añoLabel = new JLabel("Año: ");
 		JLabel mesLabel = new JLabel("Mes(numérico): ");
@@ -412,9 +479,9 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelFecha);
 
 		JPanel panelFecha2 = new JPanel();
-		JTextField año2 = new JTextField(4);
-		JTextField mes2 = new JTextField(2);
-		JTextField dia2 = new JTextField(2);
+		año2 = new JTextField(4);
+		mes2 = new JTextField(2);
+		dia2 = new JTextField(2);
 		JLabel fechaLabel2 = new JLabel("Fecha de fin: ");
 		JLabel añoLabel2 = new JLabel("Año: ");
 		JLabel mesLabel2 = new JLabel("Mes(numérico): ");
@@ -438,7 +505,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelEspacio);
 
 		JPanel panelSubmit = new JPanel();
-		JButton submit = new JButton("Enviar");
+		submit = new JButton("Enviar");
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
@@ -456,7 +523,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.removeAll();
 
 		JPanel panelNif = new JPanel();
-		JTextField nif = new JTextField(8);
+		nif = new JTextField(8);
 		JLabel nifLabel = new JLabel("NIF: ");
 		panelNif.add(nifLabel);
 		panelNif.add(nif);
@@ -464,7 +531,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelNif);
 
 		JPanel panelTelf = new JPanel();
-		JTextField telf = new JTextField(12);
+		telf = new JTextField(12);
 		JLabel telfLabel = new JLabel("Teléfono: ");
 		panelTelf.add(telfLabel);
 		panelTelf.add(telf);
@@ -472,11 +539,11 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelTelf);
 
 		JPanel panelFecha = new JPanel();
-		JTextField año = new JTextField(4);
-		JTextField mes = new JTextField(2);
-		JTextField dia = new JTextField(2);
-		JTextField hora = new JTextField(6);
-		JTextField minuto = new JTextField(6);
+		año = new JTextField(4);
+		mes = new JTextField(2);
+		dia = new JTextField(2);
+		hora = new JTextField(6);
+		minuto = new JTextField(6);
 		JLabel fechaLabel = new JLabel("Fecha de alta: ");
 		JLabel añoLabel = new JLabel("Año: ");
 		JLabel mesLabel = new JLabel("Mes(numérico): ");
@@ -514,7 +581,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelEspacio);
 
 		JPanel panelSubmit = new JPanel();
-		JButton submit = new JButton("Enviar");
+		submit = new JButton("Enviar");
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
@@ -533,7 +600,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.removeAll();
 
 		JPanel panelNif = new JPanel();
-		JTextField nif = new JTextField(8);
+		nif = new JTextField(8);
 		JLabel nifLabel = new JLabel("NIF: ");
 		panelNif.add(nifLabel);
 		panelNif.add(nif);
@@ -549,7 +616,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelEspacio);
 
 		JPanel panelSubmit = new JPanel();
-		JButton submit = new JButton("Enviar");
+		submit = new JButton("Enviar");
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
@@ -564,7 +631,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.removeAll();
 
 		JPanel panelNif = new JPanel();
-		JTextField nif = new JTextField(8);
+		nif = new JTextField(8);
 		JLabel nifLabel = new JLabel("NIF: ");
 		panelNif.add(nifLabel);
 		panelNif.add(nif);
@@ -572,9 +639,9 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelNif);
 
 		JPanel panelFecha = new JPanel();
-		JTextField año = new JTextField(4);
-		JTextField mes = new JTextField(2);
-		JTextField dia = new JTextField(2);
+		año = new JTextField(4);
+		mes = new JTextField(2);
+		dia = new JTextField(2);
 		JLabel fechaLabel = new JLabel("Fecha de inicio: ");
 		JLabel añoLabel = new JLabel("Año: ");
 		JLabel mesLabel = new JLabel("Mes(numérico): ");
@@ -590,9 +657,9 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelFecha);
 
 		JPanel panelFecha2 = new JPanel();
-		JTextField año2 = new JTextField(4);
-		JTextField mes2 = new JTextField(2);
-		JTextField dia2 = new JTextField(2);
+		año2 = new JTextField(4);
+		mes2 = new JTextField(2);
+		dia2 = new JTextField(2);
 		JLabel fechaLabel2 = new JLabel("Fecha de fin: ");
 		JLabel añoLabel2 = new JLabel("Año: ");
 		JLabel mesLabel2 = new JLabel("Mes(numérico): ");
@@ -616,7 +683,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelEspacio);
 
 		JPanel panelSubmit = new JPanel();
-		JButton submit = new JButton("Enviar");
+		submit = new JButton("Enviar");
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
@@ -635,7 +702,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.removeAll();
 
 		JPanel panelNif = new JPanel();
-		JTextField nif = new JTextField(8);
+		nif = new JTextField(8);
 		JLabel nifLabel = new JLabel("NIF: ");
 		panelNif.add(nifLabel);
 		panelNif.add(nif);
@@ -643,9 +710,9 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelNif);
 
 		JPanel panelFecha = new JPanel();
-		JTextField año = new JTextField(4);
-		JTextField mes = new JTextField(2);
-		JTextField dia = new JTextField(2);
+		año = new JTextField(4);
+		mes = new JTextField(2);
+		dia = new JTextField(2);
 		JLabel fechaLabel = new JLabel("Fecha: ");
 		JLabel añoLabel = new JLabel("Año: ");
 		JLabel mesLabel = new JLabel("Mes(numérico): ");
@@ -670,7 +737,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelEspacio);
 
 		JPanel panelSubmit = new JPanel();
-		JButton submit = new JButton("Enviar");
+		submit = new JButton("Enviar");
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
@@ -687,7 +754,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.removeAll();
 
 		JPanel panelcodFac = new JPanel();
-		JTextField codFac = new JTextField(20);
+		codFac = new JTextField(20);
 		JLabel codFacLabel = new JLabel("Código de factura: ");
 		panelcodFac.add(codFacLabel);
 		panelcodFac.add(codFac);
@@ -703,7 +770,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelEspacio);
 
 		JPanel panelSubmit = new JPanel();
-		JButton submit = new JButton("Enviar");
+		submit = new JButton("Enviar");
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
@@ -718,7 +785,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.removeAll();
 
 		JPanel panelNif = new JPanel();
-		JTextField nif = new JTextField(8);
+		nif = new JTextField(8);
 		JLabel nifLabel = new JLabel("NIF: ");
 		panelNif.add(nifLabel);
 		panelNif.add(nif);
@@ -734,7 +801,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelEspacio);
 
 		JPanel panelSubmit = new JPanel();
-		JButton submit = new JButton("Enviar");
+		submit = new JButton("Enviar");
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
@@ -749,7 +816,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.removeAll();
 
 		JPanel panelNif = new JPanel();
-		JTextField nif = new JTextField(8);
+		nif = new JTextField(8);
 		JLabel nifLabel = new JLabel("NIF: ");
 		panelNif.add(nifLabel);
 		panelNif.add(nif);
@@ -757,9 +824,9 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelNif);
 
 		JPanel panelFecha = new JPanel();
-		JTextField año = new JTextField(4);
-		JTextField mes = new JTextField(2);
-		JTextField dia = new JTextField(2);
+		año = new JTextField(4);
+		mes = new JTextField(2);
+		dia = new JTextField(2);
 		JLabel fechaLabel = new JLabel("Fecha de inicio: ");
 		JLabel añoLabel = new JLabel("Año: ");
 		JLabel mesLabel = new JLabel("Mes(numérico): ");
@@ -775,9 +842,9 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelFecha);
 
 		JPanel panelFecha2 = new JPanel();
-		JTextField año2 = new JTextField(4);
-		JTextField mes2 = new JTextField(2);
-		JTextField dia2 = new JTextField(2);
+		año2 = new JTextField(4);
+		mes2 = new JTextField(2);
+		dia2 = new JTextField(2);
 		JLabel fechaLabel2 = new JLabel("Fecha de fin: ");
 		JLabel añoLabel2 = new JLabel("Año: ");
 		JLabel mesLabel2 = new JLabel("Mes(numérico): ");
@@ -801,7 +868,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.add(panelEspacio);
 
 		JPanel panelSubmit = new JPanel();
-		JButton submit = new JButton("Enviar");
+		submit = new JButton("Enviar");
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
@@ -860,6 +927,8 @@ public class ImplementacionVista implements Vista {
 		}
 	}
 
+	//ESCUCHADORES CLIENTE
+	
 	class EscuchadorCliente implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			JButton boton = (JButton) e.getSource();
@@ -885,6 +954,137 @@ public class ImplementacionVista implements Vista {
 		}
 	}
 
+	class EscuchadorDarAlta implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			submit = (JButton) e.getSource();
+			String texto = submit.getText();
+			if (texto.equals("Enviar")) {
+				panelFinal.removeAll();
+				Calendar fecha = Calendar.getInstance();
+				int añoLocal = Integer.parseInt(año.getText().trim());
+				int mesLocal = Integer.parseInt(mes.getText().trim());
+				int diaLocal = Integer.parseInt(dia.getText().trim());
+				fecha.set(añoLocal, mesLocal, diaLocal);
+				int codPosLocal = Integer.parseInt(codPos.getText().trim());
+				Direccion dir = new Direccion(codPosLocal,prov.getText(),pob.getText());
+				Tarifa tarifaLocal = null;
+				tarifaLocal = TarifaFactory.crearTarifa(0,tarifaLocal, Double.parseDouble(tarifa.getText().trim()));
+				try {
+					controlador.creaCliente(tipo,nombre.getText(),apellido.getText(),nif.getText(),dir,correo.getText(),fecha,tarifaLocal);
+					modelo.guardarDatos();
+					
+					JLabel clienteRegistrado = new JLabel("Cliente registrado con éxito");
+					panelFinal.add(clienteRegistrado);
+					panelAbajo.add(panelFinal);
+					panelFinal.updateUI();
+					panelAbajo.updateUI();
+				} catch (ExcepcionClienteYaRegistrado e1) {
+					JLabel clienteNoRegistrado = new JLabel("Cliente ya existente");
+					panelFinal.add(clienteNoRegistrado);
+					panelAbajo.add(panelFinal);
+					panelFinal.updateUI();
+					panelAbajo.updateUI();
+				}
+			}
+		}
+	}
+	
+	class EscuchadorBorrarCliente implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			submit = (JButton) e.getSource();
+			String texto = submit.getText();
+			if (texto.equals("Enviar")) {
+				panelFinal.removeAll();
+				try {
+					controlador.borraCliente(nif.getText());
+					modelo.guardarDatos();
+					JLabel clienteBorrado = new JLabel("Cliente borrado con éxito");
+					panelFinal.add(clienteBorrado);
+					panelAbajo.add(panelFinal);
+					panelFinal.updateUI();
+					panelAbajo.updateUI();
+				} catch (ExcepcionClienteNoEncontrado e1) {
+					JLabel clienteNoEncontrado = new JLabel("Cliente no encontrado");
+					panelFinal.add(clienteNoEncontrado);
+					panelAbajo.add(panelFinal);
+					panelFinal.updateUI();
+					panelAbajo.updateUI();
+				}
+			}
+		}
+	}
+	
+	class EscuchadorCambiarTarifa implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			submit = (JButton) e.getSource();
+			String texto = submit.getText();
+			Tarifa tarifaLocal = null;
+			tarifaLocal = TarifaFactory.crearTarifa(Integer.parseInt(tipoTar.getText()),tarifaLocal, Double.parseDouble(tarifa.getText().trim()));
+			if (texto.equals("Enviar")) {
+				panelFinal.removeAll();
+				try {
+					controlador.cambiaTarifa(nif.getText(),tarifaLocal);
+					modelo.guardarDatos();
+					panelFinal = new JPanel();
+					JLabel tarifaCambiada = new JLabel("Tarifa cambiada con éxito");
+					panelFinal.add(tarifaCambiada);
+					panelAbajo.add(panelFinal);
+					panelFinal.updateUI();
+					panelAbajo.updateUI();
+				} catch (ExcepcionClienteNoEncontrado e1) {
+					JLabel clienteNoEncontrado = new JLabel("Cliente no encontrado");
+					panelFinal.add(clienteNoEncontrado);
+					panelAbajo.add(panelFinal);
+					panelFinal.updateUI();
+					panelAbajo.updateUI();
+				}
+			}
+		}
+	}
+	
+	class EscuchadorRecuperarCliente implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			submit = (JButton) e.getSource();
+			String texto = submit.getText();
+			if (texto.equals("Enviar")) {
+				panelFinal.removeAll();
+				try {
+					JLabel cliente = new JLabel(controlador.recuperarDatosCliente(nif.getText()).toString());
+					panelFinal.add(cliente);
+					panelAbajo.add(panelFinal);
+					panelFinal.updateUI();
+					panelAbajo.updateUI();
+				} catch (ExcepcionClienteNoEncontrado e1) {
+					JLabel clienteNoEncontrado = new JLabel("Cliente no encontrado");
+					panelFinal.add(clienteNoEncontrado);
+					panelAbajo.add(panelFinal);
+					panelFinal.updateUI();
+					panelAbajo.updateUI();
+				}
+			}
+		}
+	}
+	
+	class EscuchadorRecuperarTodos implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			submit = (JButton) e.getSource();
+			String texto = submit.getText();
+			if (texto.equals("Recuperar")) {
+				panelFinal.removeAll();
+				try {
+					controlador.recuperaListadoClientes();
+				} catch (ExcepcionListaClientesVacia e1) {
+					JLabel clientesNoEncontrados = new JLabel("Clientes no encontrados");
+					panelFinal.add(clientesNoEncontrados);
+					panelAbajo.add(panelFinal);
+					panelFinal.updateUI();
+					panelAbajo.updateUI();
+				}
+			}
+		}
+	}
+	
+	
 	class EscuchadorPrincipal implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			JButton boton = (JButton) e.getSource();
@@ -901,11 +1101,5 @@ public class ImplementacionVista implements Vista {
 		}
 	}
 	
-	class EscuchadorClienteControlador implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			JButton boton = (JButton) e.getSource();
-			String texto = boton.getText();
-		}
-	}
 
 }

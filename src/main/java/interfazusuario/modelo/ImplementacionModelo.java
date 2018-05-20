@@ -17,20 +17,26 @@ import factura.Factura;
 import factura.Llamada;
 import factura.Tarifa;
 import fecha.FechaGenerico;
+import interfazusuario.vista.Vista;
 import excepciones.*;
 
-public class ImplementacionModelo {
+public class ImplementacionModelo implements Modelo{
 	
 	private HashMap<String, Cliente> clientes;
 	private HashMap<String, List<Factura>> facturas;
 	private HashMap<Integer, Factura> facturasCodigo;
 	private HashMap<String, List<Llamada>> llamadas;
-
+	private Vista vista;
+	
 	public ImplementacionModelo() {
 		clientes = new HashMap<String, Cliente>();
 		facturas = new HashMap<String, List<Factura>>();
 		facturasCodigo = new HashMap<Integer, Factura>();
 		llamadas = new HashMap<String, List<Llamada>>();
+	}
+	
+	public void setVista(Vista vista) {
+		this.vista = vista;
 	}
 
 	// OPERACIONES DEL CLIENTE
