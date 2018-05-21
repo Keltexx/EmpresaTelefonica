@@ -1,14 +1,22 @@
 package interfazusuario.controlador;
 
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 import cliente.Cliente;
 import cliente.ClienteFactory;
 import cliente.Direccion;
 import excepciones.ExcepcionClienteNoEncontrado;
 import excepciones.ExcepcionClienteYaRegistrado;
+import excepciones.ExcepcionFacturaNoEncontrada;
+import excepciones.ExcepcionFechas;
 import excepciones.ExcepcionListaClientesVacia;
+import excepciones.ExcepcionListaFacturasVacia;
+import excepciones.ExcepcionListaLlamadasVacia;
+import factura.Factura;
+import factura.Llamada;
 import factura.Tarifa;
 import interfazusuario.modelo.Modelo;
 import interfazusuario.vista.Vista;
@@ -50,4 +58,38 @@ public class ImplementacionControlador implements Controlador{
 		return modelo.recuperarListadoClientes();
 		
 	}
+	
+	public Collection<Cliente> recuperaListadoClientesEntreFechas(Calendar fechaInicio, Calendar fechaFin) throws ExcepcionListaClientesVacia, ExcepcionFechas{
+		return modelo.mostrarListadoClientesFechas(fechaInicio, fechaFin);
+	}
+	
+	public boolean darDeAltaLlamada(String nif, Llamada llamada) throws ExcepcionClienteNoEncontrado{
+		return modelo.darDeAltaLlamada(nif, llamada);
+	}
+	
+	public List<Llamada> listarLlamadasCliente(String nif) throws ExcepcionClienteNoEncontrado{
+		return modelo.listarLlamadasCliente(nif);
+	}
+
+	public Collection<Llamada> mostrarListadoLlamadasFechas(String nif, Calendar fechaInicio, Calendar fechaFin) throws ExcepcionListaLlamadasVacia, ExcepcionFechas, ExcepcionClienteNoEncontrado{
+		return modelo.mostrarListadoLlamadasFechas(nif, fechaInicio, fechaFin);
+	}
+
+	public Factura emitirFactura(String nif, Calendar fechaFacturacion) throws ExcepcionClienteNoEncontrado{
+		return modelo.emitirFactura(nif, fechaFacturacion);
+	}
+	
+	public Factura recuperarDatosFacturaCodigo(Integer codigo) throws ExcepcionFacturaNoEncontrada{
+		return modelo.recuperarDatosFacturaCodigo(codigo);
+	}
+
+	public List<Factura> recuperarFacturas(String nif) throws ExcepcionClienteNoEncontrado, ExcepcionListaFacturasVacia{
+		return modelo.recuperarFacturas(nif);
+	}
+
+	public Collection<Factura> mostrarListadoFacturasFechas(String nif, Calendar fechaInicio, Calendar fechaFin) throws ExcepcionClienteNoEncontrado, ExcepcionListaFacturasVacia, ExcepcionFechas{
+		return modelo.mostrarListadoFacturasFechas(nif, fechaInicio, fechaFin);
+	}
+
+
 }

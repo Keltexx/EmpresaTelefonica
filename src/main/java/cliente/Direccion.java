@@ -42,8 +42,8 @@ public class Direccion implements Serializable{
 	}
 	
 	public String toString() {
-		return "Direccion [ \n" +
-				"\t codido postal = " + codPostal + "\n"+
+		return " Direccion [ \n" +
+				"\t codigo postal = " + codPostal + "\n"+
 				"\t provincia = " + provincia + "\n"+
 				"\t poblacion = " + poblacion + "]";
 	}

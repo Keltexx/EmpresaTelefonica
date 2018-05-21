@@ -37,7 +37,7 @@ public class Llamada implements Fecha, Serializable{
 	
 	@Override
 	public String toString() {
-		return "Factura [ \n" +
+		return "Llamada [ \n" +
 				"\t numero = " + numero + "\n" +
 				"\t fecha = " + fecha.get(Calendar.DAY_OF_MONTH) + "/" + fecha.get(Calendar.MONTH) + "/" + fecha.get(Calendar.YEAR) +
 				"\t hora = " + fecha.get(Calendar.HOUR) + ":" + fecha.get(Calendar.MINUTE) + 
