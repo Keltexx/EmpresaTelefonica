@@ -199,6 +199,7 @@ public class ImplementacionVista implements Vista {
 		panelAbajo.removeAll();
 
 		JPanel panelEmpresa = new JPanel();
+		tipo = 1;
 		JRadioButton si = new JRadioButton("si");
 		JRadioButton no = new JRadioButton("no");
 		si.setActionCommand("si");

@@ -15,6 +15,6 @@ public abstract class TarifaExtra extends TarifaBasica {
 	
 	@Override
 	public String toString() {
-		return tarifa.toString();
+		return super.toString();
 	}
 }
