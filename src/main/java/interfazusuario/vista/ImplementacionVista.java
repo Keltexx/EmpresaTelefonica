@@ -13,6 +13,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -98,6 +99,7 @@ public class ImplementacionVista implements Vista {
 		panelArriba.add(boton);
 		contenedor.add(panelArriba, BorderLayout.NORTH);
 		panelCentral = new JPanel();
+		panelCentral.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		panelArriba.setPreferredSize(new Dimension(1080, 40));
 		contenedor.add(panelCentral, BorderLayout.CENTER);
 		ventana.setSize(1280, 400);
