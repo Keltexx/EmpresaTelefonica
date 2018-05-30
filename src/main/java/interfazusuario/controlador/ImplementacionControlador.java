@@ -19,21 +19,19 @@ import factura.Factura;
 import factura.Llamada;
 import factura.Tarifa;
 import interfazusuario.modelo.Modelo;
-import interfazusuario.vista.Vista;
+
 
 
 public class ImplementacionControlador implements Controlador{
 
 	private Modelo modelo;
-	private Vista vista;
+
 	
 	public void setModelo(Modelo modelo) {
 		this.modelo = modelo;
 	}
 
-	public void setVista(Vista vista) {
-		this.vista = vista;
-	}
+
 	
 	public boolean creaCliente(int tipo,String nombre,String apellidos,String nif,Direccion dir,String correo,Calendar fecha,Tarifa tarifa) throws ExcepcionClienteYaRegistrado {
 		Cliente cliente = ClienteFactory.crearCliente(tipo,nombre,apellidos,nif,dir,correo,fecha,tarifa);

@@ -17,7 +17,6 @@ import factura.Factura;
 import factura.Llamada;
 import factura.Tarifa;
 import fecha.FechaGenerico;
-import interfazusuario.vista.Vista;
 import excepciones.*;
 
 public class ImplementacionModelo implements Modelo{
@@ -26,8 +25,7 @@ public class ImplementacionModelo implements Modelo{
 	private HashMap<String, List<Factura>> facturas;
 	private HashMap<Integer, Factura> facturasCodigo;
 	private HashMap<String, List<Llamada>> llamadas;
-	private Vista vista;
-	
+
 	public ImplementacionModelo() {
 		clientes = new HashMap<String, Cliente>();
 		facturas = new HashMap<String, List<Factura>>();
@@ -35,9 +33,7 @@ public class ImplementacionModelo implements Modelo{
 		llamadas = new HashMap<String, List<Llamada>>();
 	}
 	
-	public void setVista(Vista vista) {
-		this.vista = vista;
-	}
+
 
 	// OPERACIONES DEL CLIENTE
 
@@ -217,6 +213,7 @@ public class ImplementacionModelo implements Modelo{
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void cargarDatos() {
 		FileInputStream fis = null;
 		ObjectInputStream ois = null;

@@ -11,8 +11,6 @@ public class Main {
 	ImplementacionVista vista = new ImplementacionVista();
 	ImplementacionModelo modelo = new ImplementacionModelo();
 
-	modelo.setVista(vista);
-	controlador.setVista(vista);
 	controlador.setModelo(modelo);
 	vista.setModelo(modelo);
 	vista.setControlador(controlador);

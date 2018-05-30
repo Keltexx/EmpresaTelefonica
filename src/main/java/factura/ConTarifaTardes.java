@@ -8,11 +8,8 @@ public class ConTarifaTardes extends TarifaExtra{
 	 */
 	private static final long serialVersionUID = -1636978535843579339L;
 	
-	private Tarifa tarifa;
-	
 	public ConTarifaTardes(Tarifa tarifa, double importeExtra) {
 		super(tarifa, importeExtra);
-		this.tarifa = tarifa;
 	}
 
 	@Override
