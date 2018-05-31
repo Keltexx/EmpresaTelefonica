@@ -116,6 +116,7 @@ public class ImplementacionVista implements Vista {
 		EscuchadorCliente escuchador = new EscuchadorCliente();
 		menu.setLayout(new BoxLayout(menu, BoxLayout.LINE_AXIS));
 		JButton boton = new JButton("Nuevo cliente");
+		boton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		boton.addActionListener(escuchador);
 		menu.add(boton);
 		boton = new JButton("Borrar cliente");
@@ -133,8 +134,17 @@ public class ImplementacionVista implements Vista {
 		boton = new JButton("Mostrar listado clientes entre fechas");
 		boton.addActionListener(escuchador);
 		menu.add(boton);
-		menu.setPreferredSize(new Dimension(1200, 40));
+
+		
+		JPanel panelEspacio = new JPanel();
+		JLabel espacioLabel = new JLabel(
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
+		panelEspacio.add(espacioLabel);
+		
+		panelCentral.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		panelCentral.add(menu, BorderLayout.NORTH);
+		panelCentral.add(panelEspacio);
 		panelAbajo = new JPanel();
 		panelAbajo.setPreferredSize(new Dimension(1200, 600));
 		panelCentral.add(panelAbajo, BorderLayout.CENTER);
@@ -147,15 +157,26 @@ public class ImplementacionVista implements Vista {
 		EscuchadorLlamada escuchador = new EscuchadorLlamada();
 		menu.setLayout(new BoxLayout(menu, BoxLayout.LINE_AXIS));
 		JButton boton = new JButton("Dar alta llamada");
+		boton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		boton.addActionListener(escuchador);
 		menu.add(boton);
 		boton = new JButton("Listar llamadas cliente");
 		boton.addActionListener(escuchador);
 		menu.add(boton);
 		boton = new JButton("Listar llamadas cliente entre fechas");
+		
 		boton.addActionListener(escuchador);
 		menu.add(boton);
+		
+		JPanel panelEspacio = new JPanel();
+		JLabel espacioLabel = new JLabel(
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
+		panelEspacio.add(espacioLabel);
+		
+		panelCentral.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		panelCentral.add(menu, BorderLayout.NORTH);
+		panelCentral.add(panelEspacio);
 		panelAbajo = new JPanel();
 		panelAbajo.setPreferredSize(new Dimension(1200, 600));
 		panelCentral.add(panelAbajo, BorderLayout.CENTER);
@@ -179,7 +200,15 @@ public class ImplementacionVista implements Vista {
 		boton = new JButton("Recuperar listado facturas entre fechas");
 		boton.addActionListener(escuchador);
 		menu.add(boton);
+		
+		JPanel panelEspacio = new JPanel();
+		JLabel espacioLabel = new JLabel(
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
+		panelEspacio.add(espacioLabel);
+		
 		panelCentral.add(menu, BorderLayout.NORTH);
+		panelCentral.add(panelEspacio);
 		panelAbajo = new JPanel();
 		panelAbajo.setPreferredSize(new Dimension(1200, 600));
 		panelCentral.add(panelAbajo, BorderLayout.CENTER);
@@ -310,7 +339,15 @@ public class ImplementacionVista implements Vista {
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
+		
+		JPanel panelEspacio2 = new JPanel();
+		JLabel espacioLabel2 = new JLabel(
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
+		panelEspacio2.add(espacioLabel2);
 
+		panelAbajo.add(panelEspacio2);
+		
 		panelEspacio.updateUI();
 		panelSubmit.updateUI();
 		panelTarifa.updateUI();
@@ -351,6 +388,14 @@ public class ImplementacionVista implements Vista {
 
 		panelAbajo.add(submit);
 
+		JPanel panelEspacio2 = new JPanel();
+		JLabel espacioLabel2 = new JLabel(
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
+		panelEspacio2.add(espacioLabel2);
+
+		panelAbajo.add(panelEspacio2);
+		
 		panelEspacio.updateUI();
 		panelSubmit.updateUI();
 		panelNif.updateUI();
@@ -435,6 +480,14 @@ public class ImplementacionVista implements Vista {
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
+		
+		JPanel panelEspacio2 = new JPanel();
+		JLabel espacioLabel2 = new JLabel(
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
+		panelEspacio2.add(espacioLabel2);
+
+		panelAbajo.add(panelEspacio2);
 
 		panelSubmit.updateUI();
 		panelEspacio.updateUI();
@@ -460,6 +513,14 @@ public class ImplementacionVista implements Vista {
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
+		
+		JPanel panelEspacio2 = new JPanel();
+		JLabel espacioLabel2 = new JLabel(
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
+		panelEspacio2.add(espacioLabel2);
+
+		panelAbajo.add(panelEspacio2);
 
 		panelEspacio.updateUI();
 		panelSubmit.updateUI();
@@ -520,6 +581,14 @@ public class ImplementacionVista implements Vista {
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
+		
+		JPanel panelEspacio2 = new JPanel();
+		JLabel espacioLabel2 = new JLabel(
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
+		panelEspacio2.add(espacioLabel2);
+
+		panelAbajo.add(panelEspacio2);
 
 		panelEspacio.updateUI();
 		panelSubmit.updateUI();
@@ -598,6 +667,14 @@ public class ImplementacionVista implements Vista {
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
+		
+		JPanel panelEspacio2 = new JPanel();
+		JLabel espacioLabel2 = new JLabel(
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
+		panelEspacio2.add(espacioLabel2);
+
+		panelAbajo.add(panelEspacio2);
 
 		panelEspacio.updateUI();
 		panelSubmit.updateUI();
@@ -635,6 +712,14 @@ public class ImplementacionVista implements Vista {
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
+		
+		JPanel panelEspacio2 = new JPanel();
+		JLabel espacioLabel2 = new JLabel(
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
+		panelEspacio2.add(espacioLabel2);
+
+		panelAbajo.add(panelEspacio2);
 
 		panelEspacio.updateUI();
 		panelSubmit.updateUI();
@@ -704,6 +789,14 @@ public class ImplementacionVista implements Vista {
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
+		
+		JPanel panelEspacio2 = new JPanel();
+		JLabel espacioLabel2 = new JLabel(
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
+		panelEspacio2.add(espacioLabel2);
+
+		panelAbajo.add(panelEspacio2);
 
 		panelNif.updateUI();
 		panelEspacio.updateUI();
@@ -759,6 +852,14 @@ public class ImplementacionVista implements Vista {
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
+		
+		JPanel panelEspacio2 = new JPanel();
+		JLabel espacioLabel2 = new JLabel(
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
+		panelEspacio2.add(espacioLabel2);
+
+		panelAbajo.add(panelEspacio2);
 
 		panelEspacio.updateUI();
 		panelSubmit.updateUI();
@@ -794,6 +895,14 @@ public class ImplementacionVista implements Vista {
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
+		
+		JPanel panelEspacio2 = new JPanel();
+		JLabel espacioLabel2 = new JLabel(
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
+		panelEspacio2.add(espacioLabel2);
+
+		panelAbajo.add(panelEspacio2);
 
 		panelSubmit.updateUI();
 		panelEspacio.updateUI();
@@ -827,6 +936,14 @@ public class ImplementacionVista implements Vista {
 		panelSubmit.add(submit);
 
 		panelAbajo.add(submit);
+		
+		JPanel panelEspacio2 = new JPanel();
+		JLabel espacioLabel2 = new JLabel(
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
+		panelEspacio2.add(espacioLabel2);
+
+		panelAbajo.add(panelEspacio2);
 
 		panelSubmit.updateUI();
 		panelEspacio.updateUI();
@@ -897,6 +1014,14 @@ public class ImplementacionVista implements Vista {
 
 		panelAbajo.add(submit);
 
+		JPanel panelEspacio2 = new JPanel();
+		JLabel espacioLabel2 = new JLabel(
+				"                                                                                                                                                                                                                "
+						+ "                                                                                                                                                                                                                                                                                 ");
+		panelEspacio2.add(espacioLabel2);
+
+		panelAbajo.add(panelEspacio2);
+		
 		panelNif.updateUI();
 		panelEspacio.updateUI();
 		panelSubmit.updateUI();
@@ -1000,7 +1125,7 @@ public class ImplementacionVista implements Vista {
 
 					JLabel clienteRegistrado = new JLabel("Cliente registrado con éxito");
 					panelFinal.add(clienteRegistrado);
-					panelAbajo.add(panelFinal);
+					panelAbajo.add(panelFinal,BorderLayout.CENTER);
 					panelFinal.updateUI();
 					panelAbajo.updateUI();
 				} catch (ExcepcionClienteYaRegistrado e1) {
