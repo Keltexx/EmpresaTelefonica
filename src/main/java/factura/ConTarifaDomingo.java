@@ -27,7 +27,7 @@ public class ConTarifaDomingo extends TarifaExtra{
 	
 	@Override
 	public String toString() {
-		return "Fin de semana gratis con tarifa "+ super.toString();
+		return "Domingo con tarifa "+ super.toString();
 	}
 	
 }
